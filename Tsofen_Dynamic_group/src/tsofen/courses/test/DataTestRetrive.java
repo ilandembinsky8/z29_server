@@ -29,22 +29,49 @@ public class DataTestRetrive {
 
 
 
-	public DataTestRetrive getDataFromDb(Connection con,int ind) throws SQLException
+	public void getDataFromDb(Connection con,int ind) throws SQLException
 	{
 		
-PreparedStatement st= con.prepareStatement("select * FROM test WHERE index=?");
+      PreparedStatement st= con.prepareStatement("select * FROM test WHERE id=?");
 		
 		st.setInt(1, ind);
 		ResultSet rs= st.executeQuery();
+		
 		while(rs.next())
 		{
-			return( new DataTestRetrive(rs.getInt(1),rs.getString(2)));
+			//return( new DataTestRetrive(rs.getInt(1),rs.getString(2)));
+			this.index=rs.getInt(1);
+			this.data=rs.getString(2);
 			
 			
 		}
 		st.close();
-		return null;
 		
+		
+	}
+
+
+
+	public int getIndex() {
+		return index;
+	}
+
+
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+
+
+	public String getData() {
+		return data;
+	}
+
+
+
+	public void setData(String data) {
+		this.data = data;
 	}
 
 	
