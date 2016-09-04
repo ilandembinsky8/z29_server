@@ -8,7 +8,9 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/MOaad/workspace/Jars/gson-2.2.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/MOaad/workspace/Jars/mysql-connector-java-5.1.39/mysql-connector-java-5.1.39-bin.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/gson-2.2.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/mysql-connector-java-5.1.39-bin.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/ormlite-core-4.49-SNAPSHOT.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/ormlite-jdbc-4.49-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
