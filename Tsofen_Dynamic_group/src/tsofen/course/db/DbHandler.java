@@ -13,14 +13,15 @@ public class DbHandler {
 	private ConnectionSource conOrm;
 
 	public Dao<Item,Integer> item;
+	public Dao<User,Integer> user;
 
 
 	
 	public DbHandler(String url, String username, String password) {
 		try {
-			conOrm = new JdbcConnectionSource(url,username,password);
-			initializeDao();
-			createAllTables();
+		//	conOrm = new JdbcConnectionSource(url,username,password);
+		//	initializeDao();
+		//	createAllTables();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -28,6 +29,8 @@ public class DbHandler {
 
 	public void initializeDao() throws Exception {
 		item = DaoManager.createDao(conOrm,Item.class);
+		user = DaoManager.createDao(conOrm,User.class);
+
 
 	}
 
@@ -39,6 +42,8 @@ public class DbHandler {
 	public void createAllTables() throws Exception {
 		TableUtils.dropTable(conOrm, Item.class,true); 
 		TableUtils.createTable(conOrm,Item.class);
+		TableUtils.dropTable(conOrm, User.class,true); 
+		TableUtils.createTable(conOrm,User.class);
 
 
 	}
