@@ -4,7 +4,6 @@
   <%@page import="tsofen.courses.test.*" %> 
  
 <jsp:useBean id="con" class="tsofen.course.db.MyConnection" scope="session"></jsp:useBean>
-
 <%
 
 String index=request.getParameter("index");

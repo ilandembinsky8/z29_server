@@ -15,7 +15,7 @@ public class testRun {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
-		List<Object> obj = new  ArrayList<Object>();
+	/*	List<Object> obj = new  ArrayList<Object>();
 		
 		MyConnection con = new MyConnection();
 		// connection ormlite 
@@ -65,7 +65,7 @@ public class testRun {
 
 		 
 
-		
+	*/	
 	}
 
 }

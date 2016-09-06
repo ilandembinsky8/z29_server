@@ -17,6 +17,5 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/RedshiftJDBC42-1.1.17.1017.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

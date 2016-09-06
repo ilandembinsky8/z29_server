@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import tsofen.course.db.MyConnection;
+
 public class DataTestRetrive {
 	
 	private int index;
@@ -26,6 +28,7 @@ public class DataTestRetrive {
 
 	}
 
+
 	public void getDataFromDb(Connection con,int ind) throws SQLException
 	{
 		
@@ -36,14 +39,12 @@ public class DataTestRetrive {
 		
 		while(rs.next())
 		{
-			//return( new DataTestRetrive(rs.getInt(1),rs.getString(2)));
 			this.index=rs.getInt(1);
-		this.data=rs.getString(2);
+			this.data=rs.getString(2);
 	
 		}
 		st.close();
 	}
-
 	public int getIndex() {
 		return index;
 	}

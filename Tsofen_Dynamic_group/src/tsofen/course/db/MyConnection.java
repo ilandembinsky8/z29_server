@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class MyConnection {
 	
-	private DbHandler handler;
+	//private DbHandler handler;
 	private Connection con;
 	
 	
@@ -35,10 +35,10 @@ public class MyConnection {
 		con.close();
 	}
 
-
+/*
 	public DbHandler getHandler() {
 		return handler;
 	}
-
+*/
 
 }
