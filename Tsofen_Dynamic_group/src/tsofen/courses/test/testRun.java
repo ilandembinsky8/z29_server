@@ -6,8 +6,8 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
+import connection.db.MyConnection;
 import tsofen.course.db.DbHandler;
-import tsofen.course.db.MyConnection;
 import tsofen.course.models.Item;
 import tsofen.course.models.User;
 

@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import tsofen.course.db.MyConnection;
+import connection.db.MyConnection;
 
 public class DataTestRetrive {
 	
@@ -26,6 +26,14 @@ public class DataTestRetrive {
 		this.index=1;
 		this.data="George";
 
+	}
+	
+	
+public ResultSet  getExchangeTable(Connection con) throws SQLException{
+		
+		PreparedStatement st= con.prepareStatement("select * FROM kpi_PRT_CAMPAIGN");
+		return st.executeQuery();
+		
 	}
 
 
