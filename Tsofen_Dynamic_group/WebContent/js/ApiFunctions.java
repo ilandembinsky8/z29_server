@@ -45,17 +45,11 @@ public class ApiFunctions {
 	}
 	
 	
-/*	public static JSONArray getQuery (Connection con,int ind) throws SQLException{
+	public static JSONArray getQuery (Connection con,int ind) throws SQLException{
 		DataTestRetrive data=new DataTestRetrive();
 		ResultSet rs =data.getDataFromDb(con, ind);
 		return toList(rs);
 		
 	}
-*/
-	public static JSONArray getQuery (Connection con) throws SQLException{
-		DataTestRetrive data=new DataTestRetrive();
-		ResultSet rs =data.getDataFromDb(con);
-		return toList(rs);
-		
-	}
+
 }

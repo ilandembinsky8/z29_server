@@ -17,9 +17,7 @@ public class MyConnection {
 		String url="jdbc:mysql://tsofen29db.csks0itfccec.eu-central-1.rds.amazonaws.com:3306/Tsofen29Database";
 		String user="Tsofen29DBUser"; 
 		String pass="Tsofen29SQL"; 
-		con=DriverManager.getConnection(url,user,pass);
-		//handler=new DbHandler(url,user,pass);
-		
+		con=DriverManager.getConnection(url,user,pass);		
 		
 	}
 
@@ -35,10 +33,5 @@ public class MyConnection {
 		con.close();
 	}
 
-/*
-	public DbHandler getHandler() {
-		return handler;
-	}
-*/
 
 }

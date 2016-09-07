@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import connection.db.MyConnection;
+import tsofen.course.db.MyConnection;
 
 public class DataTestRetrive {
 	
@@ -27,26 +27,15 @@ public class DataTestRetrive {
 		this.data="George";
 
 	}
-	
-	
-public ResultSet  getExchangeTable(Connection con) throws SQLException{
-		
-		PreparedStatement st= con.prepareStatement("select * FROM kpi_PRT_CAMPAIGN");
-		return st.executeQuery();
-		
-	}
 
 
-	public ResultSet getDataFromDb(Connection con,int ind) throws SQLException
+	public ResultSet getDataFromDb(Connection con) throws SQLException
 	{
 		
-     PreparedStatement st= con.prepareStatement("select * FROM item WHERE id=?");
-		
-	st.setInt(1, ind);
-	ResultSet rs= st.executeQuery();
-	//st.close();
-	
-	return rs;
+	     PreparedStatement st= con.prepareStatement("SELECT * FROM Tsofen29Database.item");			
+		 ResultSet rs= st.executeQuery();	
+		 return rs;
+		 
 	}
 	public int getIndex() {
 		return index;
