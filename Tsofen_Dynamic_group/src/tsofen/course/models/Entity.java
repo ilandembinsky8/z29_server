@@ -8,9 +8,7 @@ import java.sql.SQLException;
 import com.j256.ormlite.misc.BaseDaoEnabled;
 
 /**
- * public abstract class Entity 
- * implements Serializable
- * @author maisam
+ * 
  *
  */
 public abstract class Entity extends BaseDaoEnabled implements Serializable {
