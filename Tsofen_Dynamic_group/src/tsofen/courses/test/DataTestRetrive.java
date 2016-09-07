@@ -36,7 +36,7 @@ public class DataTestRetrive {
 		
 	st.setInt(1, ind);
 	ResultSet rs= st.executeQuery();
-	st.close();
+	//st.close();
 	
 	return rs;
 	}
