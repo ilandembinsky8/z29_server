@@ -1,0 +1,161 @@
+﻿<html>
+<head>
+<title></title>
+<script type="text/javascript" src="js/fusioncharts.js"></script>
+<script type="text/javascript" src="js/themes/fusioncharts.theme.fint.js"></script>
+<script></script>
+<link rel="stylesheet" href="css/stylesheet.css" type="text/css" />
+</head>
+<body style="font-family:open_sans_hebrewregular;background-color:white;margin:0px;padding:0px;width:100%">
+<div style="float:left;width:50%;box-sizing:border-box;padding-left:5%;padding-right:5%;margin-top:20px">
+<div id="chart-container">FusionCharts XT will load here!</div>
+</div>
+<div style="float:left;width:50%;box-sizing:border-box;padding-left:5%;padding-right:5%">
+    <table cellspacing="0" cellpadding="5" style="width:100%;direction:rtl;text-align:center">
+        <tr style="color:#6f777c;font-size:14px;font-family:open_sans_hebrewbold">
+            <td style="text-align:right">שעה</td>
+            <td>SMTP Server</td>
+        </tr>
+        <tr style="color:#333333;font-size:14px;background-color:#f2f2f2">
+            <td>10:00</td>
+            <td style="color:#199a53">0.25</td>
+        </tr>
+        <tr style="color:#333333;font-size:14px;background-color:#ffffff">
+            <td>10:05</td>
+            <td style="color:#ffcc00">0.60</td>
+        </tr>
+        <tr style="color:#333333;font-size:14px;background-color:#f2f2f2">
+            <td>10:10</td>
+            <td style="color:#bd2e02">0.80</td>
+        </tr>
+        <tr style="color:#333333;font-size:14px;background-color:#ffffff">
+            <td>10:15</td>
+            <td style="color:#bd2e02">1.02</td>
+        </tr>
+        <tr style="color:#333333;font-size:14px;background-color:#f2f2f2">
+            <td>10:20</td>
+            <td style="color:#199a53">0.22</td>
+        </tr>
+        <tr style="color:#333333;font-size:14px;background-color:#ffffff">
+            <td>10:25</td>
+            <td style="color:#199a53">0.18</td>
+        </tr>
+        <tr style="color:#333333;font-size:14px;background-color:#f2f2f2">
+            <td>10:30</td>
+            <td style="color:#bd2e02">0.90</td>
+        </tr>
+        <tr style="color:#333333;font-size:14px;background-color:#ffffff">
+            <td>10:35</td>
+            <td style="color:#bd2e02">0.80</td>
+        </tr>
+        <tr style="color:#333333;font-size:14px;background-color:#f2f2f2">
+            <td>10:40</td>
+            <td style="color:#ffcc00">2.5</td>
+        </tr>
+        <tr style="color:#333333;font-size:14px;background-color:#ffffff">
+            <td>10:45</td>
+            <td style="color:#bd2e02">0.90</td>
+        </tr>
+        <tr style="color:#333333;font-size:14px;background-color:#f2f2f2">
+            <td>10:50</td>
+            <td style="color:#ffcc00">0.68</td>
+        </tr>
+        
+    </table>
+</div>
+<script>
+    FusionCharts.ready(function () {
+        var visitChart = new FusionCharts({
+            type: 'msline',
+            renderAt: 'chart-container',
+            width: '560',
+            height: '320',
+            dataFormat: 'json',
+            dataSource: {
+                "chart": {
+                    "caption": "",
+                    "subCaption": "",
+                    "baseFontSize":"13",
+                    "captionFontSize": "14",
+                    "subcaptionFontSize": "14",
+                    "subcaptionFontBold": "0",
+                    "paletteColors": "#cc00cc,#17ae5b,#0574c2",
+                    "bgcolor": "#ffffff",
+                    "showBorder": "0",
+                    "showShadow": "0",
+                    "showCanvasBorder": "0",
+                    "usePlotGradientColor": "0",
+                    "legendBorderAlpha": "0",
+                    "legendShadow": "0",
+                    "showAxisLines": "0",
+                    "showAlternateHGridColor": "0",
+                    "divlineThickness": "1",
+                    "divLineIsDashed": "1",
+                    "divLineDashLen": "1",
+                    "divLineGapLen": "1",
+                    "xAxisName": "Hour",
+                    "xAxisNameFontSize":"14",
+                    "showValues": "0"
+                },
+                "categories": [
+                    {
+                        "category": [
+                            { "label": "aaa" },
+                            { "label": "10:05" },
+                            { "label": "10:10" },
+                            /*{
+                                "vline": "true",
+                                "lineposition": "0",
+                                "color": "#6baa01",
+                                "labelHAlign": "center",
+                                "labelPosition": "0",
+                                "label": "National holiday",
+                                "dashed": "1"
+                            },*/
+                            { "label": "10:15" },
+                            { "label": "10:20" },
+                            { "label": "10:25" },
+                            { "label": "10:30" },
+                            { "label": "10:35" },
+                            { "label": "10:40" },
+                            { "label": "10:45" },
+                            { "label": "10:50" }
+                        ]
+                    }
+                ],
+                "dataset": [
+                    {
+                        "seriesname": "Outlook -> SMTP Server",
+                        "data": [
+                            { "value": "0.25" },
+                            { "value": "0.6" },
+                            { "value": "0.8" },
+                            { "value": "1.02" },
+                            { "value": "0.22" },
+                            { "value": "0.18" },
+                            { "value": "0.9" },
+                            { "value": "0.8" },
+                            { "value": "2.5" },
+                            { "value": "0.6" },
+                            { "value": "0.68" }
+                        ]
+                    }
+                ],
+                "trendlines": [
+                    {
+                        "line": [
+                            {
+                                "startvalue": "17022",
+                                "color": "#6baa01",
+                                "valueOnRight": "1",
+                                "displayvalue": "Average"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }).render();
+    });
+</script>
+</body>
+</html>

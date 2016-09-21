@@ -28,22 +28,23 @@ public class HandlerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		private MyConnection con;
+		 MyConnection con;
 		PrintWriter out;
 		
 		try {
 			
 			out = response.getWriter();
+			NoBidMethods nobid=NoBidMethods.getInstance();
 			
 			String func = request.getParameter("func");
 			
 			if(func.equals("getEx"))
-				out.print(getExchange(con.getCon());
-			else if(func.equals("getAdv"))
-				out.print(um.getAdv());
-			else if(func.equals("getAdvForEx"))
-				out.print(um.getAdvForEx(Integer.parseInt(request.getParameter("exID"))));
-			
+				out.print(nobid.getExchange(con.getCon()));
+//			else if(func.equals("getAdv"))
+//				out.print(um.getAdv());
+//			else if(func.equals("getAdvForEx"))
+//				out.print(um.getAdvForEx(Integer.parseInt(request.getParameter("exID"))));
+//			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

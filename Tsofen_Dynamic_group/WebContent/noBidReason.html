@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Admin Dashboard</title>
-	<meta charset="utf-8">
+	<meta charset="UTF-8">
+	<title>No bid Reason</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -36,6 +36,10 @@
 	    	});
 	    });
     </script>
+    
+    <!-- Bootstrap MultiSelect -->
+    <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
 </head>
 <body>
 	<div class="blackWindow"></div>
@@ -101,10 +105,10 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
+                    <li>
                         <a href="index.html"><i class="fa fa-fw fa-file"></i> KPI's</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="noBidReason.html"><i class="fa fa-fw fa-file"></i> No Bid Reason</a>
                     </li>
                 </ul>
@@ -120,7 +124,7 @@
             	
 				<div class="row">
 					<div class="col-xs-12">
-				    	<h3>Fill to show a bar chart</h3> 
+				    	<h3>Fill to show a tree</h3> 
 				    </div>
 				    <div class="col-xs-12 col-sm-9">
 				    	<form class="form-horizontal" role="form">
@@ -129,68 +133,37 @@
 				            	<label for="telnum" class="col-sm-2 control-label">Date</label>
 				                <div class="col-xs-12 col-sm-10 col-lg-5 margin-bottom-6">
 				                	<div class="input-group">
-				                    	<div class="input-group-addon">From</div>
+				                    	<div class="input-group-addon">Reference</div>
 				                        <input class="form-control" type="date" id="fromDate">
 				                    </div>
 				                </div>
 				                <div class="col-xs-12 col-sm-10 col-sm-offset-2 col-lg-5 col-lg-offset-0">
 				                	<div class="input-group">
-				                    	<div class="input-group-addon">To</div>
+				                    	<div class="input-group-addon">Compare To</div>
 				                        <input class="form-control" type="date" id=toDate>
 				                    </div>
 				                </div>
 				            </div>
 				            
 				        	<div class="form-group">
-				            	<label for="firstname" class="col-sm-2 control-label">Exchange</label>         
+				            	<label for="firstname" class="col-sm-2 control-label">Exchange Name</label>         
 				            	<div class="col-sm-10">
 				            		<select class="form-control" id="exSelect">
 				                    	<option>select</option>
 					  				</select>
 				            	</div>
+                                              
 				            </div>
-				            
-				            <div class="form-group">
-				            	<label for="lastname" class="col-sm-2 control-label">Advertiser</label>
-				                <div class="col-sm-10">
-				                	<select class="form-control" id="advSelect">
-					  					<option>select</option>
-					  				</select>
-				                </div>
-				            </div>
-				            
-				            <div class="form-group">
-				            	<label for="emailid" class="col-sm-2 control-label">Campaign</label>
-				                <div class="col-sm-10">
-				                	<select class="form-control" id="campaignSelect">
-					  					<option>select</option>
-					  				</select>
-				                </div>
-				            </div>
-				            
-				            <div class="form-group">
-				            	<label for="emailid" class="col-sm-2 control-label">Ad-Group</label>
-				                <div class="col-sm-10">
-				                	<select class="form-control" id="adgroupSelect">
-					  					<option>select</option>
-					  				</select>
-				                </div>
-				            </div>
-				            
-				             <div class="form-group">
-				            	<label for="emailid" class="col-sm-2 control-label">Creative</label>
-				                <div class="col-sm-10">
-				                	<select class="form-control" id="creativeSelect">
-					  					<option>select</option>
-					  				</select>
-				                </div>
-				            </div>
-				            
-				            <div class="form-group">                        
-				            	<div class="col-sm-offset-2 col-sm-10">
-				                	<button type="submit" class="btn btn-primary">Send Feedback</button>
-				                </div>
-				            </div>
+                                            
+                                            <div class="form-group">
+				            	<div class="col-sm-2" id="noBidReasonLabel">
+                                                </div>
+                                                
+				            	<div class="col-sm-10">
+				            		<div id="noBidReason"></div>
+				            	</div>
+                                            </div>
+                                            
 				            
 				        </form>
 				    </div>
@@ -209,7 +182,7 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
-    <!-- KPI's JavaScript -->
-    <script src="js/kpi.js"></script>
+    <!-- No Bid Reason JavaScript -->
+    <script src="js/noBidReasons.js"></script>
 </body>
 </html>

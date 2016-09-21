@@ -1,0 +1,161 @@
+﻿<html>
+<head>
+<title></title>
+<script type="text/javascript" src="js/fusioncharts.js"></script>
+<script type="text/javascript" src="js/themes/fusioncharts.theme.fint.js"></script>
+<link rel="stylesheet" href="css/stylesheet.css" type="text/css" />
+</head>
+<body style="font-family:open_sans_hebrewregular;background-color:white;margin:0px;padding:0px">
+<div class="upperLegends">
+    <div style="float:left;width:20%;height:20px">Outlook</div>
+    <div style="float:left;width:20%">Infobay Recieve</div>
+    <div style="float:left;width:20%">Infobay Archive</div>
+    <div style="float:left;width:20%">DLP Check</div>
+    <div style="float:left;width:20%">Sent to user</div>
+</div>
+<div style="float:right;width:100%;box-sizing:border-box;padding-left:10%;padding-right:10%">
+<div id="chart-container">FusionCharts XT will load here!</div>
+</div>
+<div class="bottomLegends">
+    <div style="float:left;width:25%">Exchange & DLP</div>
+    <div style="float:left;width:25%">Save in Infobay</div>
+    <div style="float:left;width:25%">DLP</div>
+    <div style="float:left;width:25%">Exchange</div>
+</div>
+<script>
+    FusionCharts.ready(function () {
+        var cpuGauge = new FusionCharts({
+            type: 'hlineargauge',
+            renderAt: 'chart-container',
+            id: 'cpu-linear-gauge',
+            width: '100%',
+            height: '100',
+            dataFormat: 'json',
+            dataSource: {
+                "chart": {
+                    "theme": "fint",
+                    "caption": "",
+                    "lowerLimit": "0",
+                    "upperLimit": "100",
+                    "numberSuffix": "",
+                    "chartTopMargin": "0",
+                    "chartBottomMargin": "0",
+                    //Tick mark cosmetics
+                    "minorTMNumber": "4",
+                    "majorTMColor": "#163143",
+                    "majorTMAlpha": "50",
+                    "majorTMHeight": "7",
+                    "majorTMThickness": "2",
+                    "minorTMColor": "#163143",
+                    "minorTMAlpha": "30",
+                    "minorTMHeight": "4",
+                    "minorTMThickness": "1",
+                    "gaugeFillMix": "{dark-10},{dark-40},{dark-10}",
+                    "gaugeFillRatio": "40,20,40",
+                    "showTickValues": "0",
+                    "baseFont": "Verdana",
+                    "baseFontSize": "12",
+                    "baseFontColor": "#FFFFFF",
+                    "theme": "fint"
+                },
+                "colorRange": {
+                    "color": [
+                        {
+                            "minValue": "0",
+                            "maxValue": "25",
+                            "label": "0.13 Seconds",
+                            "code": "#199a53"
+                        },
+                        {
+                            "minValue": "25",
+                            "maxValue": "50",
+                            "label": "0.2 Seconds",
+                            "code": "#199a53"
+                        },
+                        {
+                            "minValue": "50",
+                            "maxValue": "75",
+                            "label": "0.189 Seconds",
+                            "code": "#ffcc00"
+                        }
+                        ,
+                        {
+                            "minValue": "75",
+                            "maxValue": "100",
+                            "label": "1.2 Seconds",
+                            "code": "#199a53"
+                        }
+                    ]
+                },
+                "pointers": {
+                    "pointer": [
+                        {
+                            "borderColor": "#333333",
+                            "borderThickness": "2",
+                            "borderAlpha": "60",
+                            "bgColor": "#bac5cb",
+                            "bgAlpha": "75",
+                            "radius": "16",
+                            "sides": "4",
+                            "value": "100",
+                            "showValue": "0",
+                            "toolText": "Sent to User"
+                        },
+                        {
+                            "borderColor": "#333333",
+                            "borderThickness": "2",
+                            "borderAlpha": "60",
+                            "bgColor": "#bac5cb",
+                            "bgAlpha": "75",
+                            "radius": "16",
+                            "sides": "4",
+                            "value": "50",
+                            "showValue": "0",
+                            "toolText": "Infobay Archive"
+                        },
+                        {
+                            "borderColor": "#333333",
+                            "borderThickness": "2",
+                            "borderAlpha": "60",
+                            "bgColor": "#bac5cb",
+                            "bgAlpha": "75",
+                            "radius": "16",
+                            "sides": "4",
+                            "value": "25",
+                            "showValue": "0",
+                            "toolText": "Infobay Recieve"
+                        },
+                        {
+                            "borderColor": "#333333",
+                            "borderThickness": "2",
+                            "borderAlpha": "60",
+                            "bgColor": "#bac5cb",
+                            "bgAlpha": "75",
+                            "radius": "16",
+                            "sides": "4",
+                            "value": "75",
+                            "showValue": "0",
+                            "toolText": "DLP Check"
+                        }
+                        ,
+                        {
+                            "borderColor": "#333333",
+                            "borderThickness": "2",
+                            "borderAlpha": "60",
+                            "bgColor": "#bac5cb",
+                            "bgAlpha": "75",
+                            "radius": "16",
+                            "sides": "4",
+                            "value": "0",
+                            "showValue": "0",
+                            "toolText": "Outlook"
+                        }
+                    ]
+                }
+            }
+        })
+        .render();
+    });
+</script>
+</body>
+</html>

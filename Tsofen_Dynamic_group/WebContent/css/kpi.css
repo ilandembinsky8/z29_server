@@ -30,8 +30,18 @@ select {
 	overflow-y: auto;
 }
 
+
+@media(max-width: 1200px){
+	
+	.margin-bottom-6 {
+		margin-bottom: 6px;
+	}
+}
+
 @media(max-width: 768px){
+	
 	.col-sm-2 {
 		text-align: left;
 	}
 }
+
