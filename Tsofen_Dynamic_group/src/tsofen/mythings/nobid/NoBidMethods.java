@@ -29,7 +29,7 @@ public class NoBidMethods {
 		
 jArr = new JsonArray();
 		
-		rs = st.executeQuery("SELECT * FROM Exchanges;");
+		rs = st.executeQuery("SELECT * FROM Updated.PRT_CAMPAIGN;");
 		while(rs.next()){
 			jObj = new JsonObject();
 			jObj.addProperty("id", rs.getInt(1));
