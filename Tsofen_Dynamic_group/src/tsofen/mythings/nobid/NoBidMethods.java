@@ -27,7 +27,7 @@ public class NoBidMethods {
 		 JsonObject jObj;
 		
 		
-jArr = new JsonArray();
+       jArr = new JsonArray();
 		
 		rs = st.executeQuery("SELECT * FROM Updated.PRT_CAMPAIGN;");
 		while(rs.next()){
