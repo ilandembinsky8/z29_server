@@ -1,4 +1,4 @@
-
+package tsofen.mythings.nobid;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +17,6 @@ import tsofen.course.db.MyConnection;
 @WebServlet("/getdata")
 public class HandlerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
     /**
      * Default constructor. 
      */
@@ -28,25 +27,32 @@ public class HandlerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		 MyConnection con;
+		MyConnection con = null;
+		try {
+			con = new MyConnection();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 		PrintWriter out;
 		
 		try {
 			
 			out = response.getWriter();
-			NoBidMethods nobid=NoBidMethods.getInstance();
 			
 			String func = request.getParameter("func");
 			
 			if(func.equals("getEx"))
-				out.print(nobid.getExchange(con.getCon()));
+				out.print(NoBidMethods.getExchange(con.getCon()));
 //			else if(func.equals("getAdv"))
 //				out.print(um.getAdv());
 //			else if(func.equals("getAdvForEx"))
 //				out.print(um.getAdvForEx(Integer.parseInt(request.getParameter("exID"))));
 //			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

@@ -12,14 +12,13 @@ import tsofen.course.db.MyConnection;
 
 public class NoBidMethods {
 
-   private static NoBidMethods instance;
 	
 	
 	private NoBidMethods(){}
 	
 	
 	
-	public String getExchange(Connection con) throws SQLException{
+	public static String getExchange(Connection con) throws SQLException{
 		
 		Statement st = null;
 		 ResultSet rs;
@@ -39,16 +38,5 @@ public class NoBidMethods {
 		con.close();
 		
         return jArr.toString();
-	}
-	
-	public static NoBidMethods getInstance(){
-		
-		if(instance==null)
-			instance=new NoBidMethods();
-		return instance;
-		
-	}
-	
-	
-	
+	}	
 }
