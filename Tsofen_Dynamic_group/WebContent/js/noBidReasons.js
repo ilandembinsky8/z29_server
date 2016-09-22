@@ -19,6 +19,7 @@ $("#exSelect").change(function(){
 	
 	 
 	$.get("getdata?func=getNoBid&Exchangeid=" + this.value, function(data){
+		var exchangeid=this.value;
 		var jsonData = JSON.parse(data);
 		for(var i = 0; i < jsonData.length; i++){ 
 			$('#advSelect').append($("<option></option>").attr("value",jsonData[i].id).text(jsonData[i].name)); 
@@ -31,10 +32,12 @@ $("#exSelect").change(function(){
                         buttonWidth: '100%',
                         
                         onChange: function() {
-                            
+                       $.get("getdata?func=getAd&noBidReason="+this.value+"&Exchangeid="+exchangeid,function(data){})                       
+                         
                         }
                         
                     });  
+                    
 	});
 });
 
