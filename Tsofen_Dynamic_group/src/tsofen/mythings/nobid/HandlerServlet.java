@@ -41,13 +41,17 @@ public class HandlerServlet extends HttpServlet {
 		PrintWriter out;
 		
 		try {
-			
+			String Exchangeid;
 			out = response.getWriter();
-			
 			String func = request.getParameter("func");
 			
 			if(func.equals("getEx"))
 				out.print(NoBidMethods.getExchange(con.getCon()));
+			if(func.equals("getNoBid")){
+			Exchangeid= request.getParameter("Exchangeid");
+			
+				out.print(NoBidMethods.getNoBidReason(con.getCon(), Exchangeid));
+			}
 //			else if(func.equals("getAdv"))
 //				out.print(um.getAdv());
 //			else if(func.equals("getAdvForEx"))
