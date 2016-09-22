@@ -9,7 +9,6 @@ public class MyConnection {
 	
 	//private DbHandler handler;
 	private Connection con;
-	private static MyConnection _instance = null;
 	private final String url = "jdbc:mysql://tsofen29db.csks0itfccec.eu-central-1.rds.amazonaws.com:3306/Updated";
 	private final String username = "Tsofen29DBUser";
 	private final String pass = "Tsofen29SQL";
@@ -17,8 +16,8 @@ public class MyConnection {
 	public MyConnection() throws ClassNotFoundException, SQLException{
 		
 		Class.forName("com.mysql.jdbc.Driver");
-	
-		con=DriverManager.getConnection(url,username,pass);		
+		con=DriverManager.getConnection(url,username,pass);	
+		connectToDB(); 
 		
 	}
 	
@@ -27,12 +26,7 @@ public class MyConnection {
 		//st =  con.createStatement();
 	}
 
-	public static MyConnection getinstance() throws ClassNotFoundException, SQLException {
-		if(_instance == null)
-			_instance = new MyConnection();
-		return _instance;
-	}
-	
+
 	public Connection getCon(){
 		return con;
 		

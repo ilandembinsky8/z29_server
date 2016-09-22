@@ -20,7 +20,8 @@ public class NoBidMethods {
 	
 	public static String getExchange(Connection con) throws SQLException{
 		
-		Statement st = null;
+		Statement st =  con.createStatement();
+
 		 ResultSet rs;
 		 JsonArray jArr;
 		 JsonObject jObj;
