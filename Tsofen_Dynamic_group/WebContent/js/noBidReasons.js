@@ -18,7 +18,7 @@ $("#exSelect").change(function(){
 				   + '</select></div></div>');
 	
 	 
-	$.get("getdata?func=getAdvForEx&exID=" + this.value, function(data){
+	$.get("getdata?func=getNoBid&Exchangeid=" + this.value, function(data){
 		var jsonData = JSON.parse(data);
 		for(var i = 0; i < jsonData.length; i++){ 
 			$('#advSelect').append($("<option></option>").attr("value",jsonData[i].id).text(jsonData[i].name)); 
@@ -38,6 +38,10 @@ $("#exSelect").change(function(){
 	});
 });
 
+	
+	
+	
+}
 
 
 
