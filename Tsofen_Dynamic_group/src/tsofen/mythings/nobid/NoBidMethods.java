@@ -8,6 +8,7 @@ import java.sql.Statement;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
 import tsofen.course.db.MyConnection;
 import tsofen.courses.test.DataTestRetrive;
@@ -48,14 +49,13 @@ public static String getNoBidReason(Connection con,String Exchangeid ) throws SQ
 		 ResultSet rs;
 		 JsonArray jArr;
 		 JsonObject jObj;
-		
+	System.out.println(Exchangeid);
        jArr = new JsonArray();
-       String query="select distinct REASON_TYPE.NO_BID_REASON_TYPE_ID , REASON_TYPE.NO_BID_REASON_TYPE from REASON_TYPE inner join NOBID_MAINTABLE on NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID=REASON_TYPE.NO_BID_REASON_TYPE_ID where NOBID_MAINTABLE.PRT_CAMPAIGN_ID='?' ;";
-
-       PreparedStatement st= con.prepareStatement(query);
        int id = Integer.parseInt(Exchangeid);
-
-       st.setInt(1, id);
+       String query="select distinct REASON_TYPE.NO_BID_REASON_TYPE_ID , REASON_TYPE.NO_BID_REASON_TYPE from REASON_TYPE inner join NOBID_MAINTABLE on NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID=REASON_TYPE.NO_BID_REASON_TYPE_ID where NOBID_MAINTABLE.PRT_CAMPAIGN_ID=" +id;
+       
+       PreparedStatement st= con.prepareStatement(query);
+    //   st.setInt(1, id);
        
 		rs = st.executeQuery(query);
 		while(rs.next()){
@@ -65,7 +65,7 @@ public static String getNoBidReason(Connection con,String Exchangeid ) throws SQ
 			jArr.add(jObj);
 		}
 		con.close();
-		
+		System.out.println(jArr.toString());
         return jArr.toString();
 	}	
 
