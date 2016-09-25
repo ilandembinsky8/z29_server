@@ -125,8 +125,9 @@ public static String getExample(Connection con,String ExchangeId,String... noBid
 	rs = st.executeQuery(query);
 	while(rs.next()){
 		jObj = new JsonObject();
-		jObj.addProperty("name", rs.getString(1));
-	 	jObj.addProperty("count", rs.getInt(2));
+		jObj.addProperty("Advertiser", rs.getInt(1));
+	 	jObj.addProperty("Clicks", rs.getString(2));
+
 		jArr.add(jObj);
 	   }
 
