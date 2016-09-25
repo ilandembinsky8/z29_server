@@ -29,7 +29,7 @@ public class NoBidMethods {
 		
        jArr = new JsonArray();
 		
-		rs = st.executeQuery("SELECT * FROM Updated.PRT_CAMPAIGN;");
+		rs = st.executeQuery("SELECT * FROM Updated.PRT_CAMPAIGN ");
 		while(rs.next()){
 			jObj = new JsonObject();
 			jObj.addProperty("id", rs.getInt(1));
@@ -67,7 +67,7 @@ public static String getNoBidReason(Connection con,String Exchangeid ) throws SQ
 	}
 
 
-
+/*
 public static String getAdv(Connection con,String ExchangeId,String... noBidId ) throws SQLException{
 	
 	 ResultSet rs;
@@ -79,10 +79,9 @@ public static String getAdv(Connection con,String ExchangeId,String... noBidId )
   int id = Integer.parseInt(ExchangeId);
 
 for(int i=0;i<noBidId.length;i++){
-  query+="SELECT DISTINCT ADV_PROJECT.ADV_PROJECT_ID,ADV_PROJECT.ADV_PROJECT_NAME FROM ADV_PROJECT,NOBID_MAINTABLE WHERE NOBID_MAINTABLE.PRT_CAMPAIGN_ID="+id+" AND NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID="+noBidId[i]+" AND ADV_PROJECT.ADV_PROJECT_ID=NOBID_MAINTABLE.ADV_PROJECT_ID";
+  query="SELECT DISTINCT ADV_PROJECT.ADV_PROJECT_ID,ADV_PROJECT.ADV_PROJECT_NAME FROM ADV_PROJECT,NOBID_MAINTABLE WHERE NOBID_MAINTABLE.PRT_CAMPAIGN_ID="+id+" AND NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID="+noBidId[i]+" AND ADV_PROJECT.ADV_PROJECT_ID=NOBID_MAINTABLE.ADV_PROJECT_ID";
 
   PreparedStatement st= con.prepareStatement(query);
-// st.setInt(1, id);
   
 	rs = st.executeQuery(query);
 	while(rs.next()){
@@ -97,6 +96,40 @@ for(int i=0;i<noBidId.length;i++){
    return jArr.toString();
 }	
 
+*/
 
+//Example
+public static String getImpressions(Connection con,String ExchangeId,String... noBidId ) throws SQLException{
+	
+	 ResultSet rs;
+	 JsonArray jArr;
+	 JsonObject jObj;
+	 String query="";
+ jArr = new JsonArray();
+ int id = Integer.parseInt(ExchangeId);
+
+ for(int i=0;i<noBidId.length;i++)
+ {
+ query="SELECT ADV_PROJECT.ADV_PROJECT_NAME , sum(NOBID_MAINTABLE.CNT)"
+		+" FROM ADV_PROJECT,NOBID_MAINTABLE"
+		+" WHERE NOBID_MAINTABLE.PRT_CAMPAIGN_ID="+ id+"AND NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID="+noBidId[i]
+		+" and ADV_PROJECT.ADV_PROJECT_ID = NOBID_MAINTABLE.ADV_PROJECT_ID"
+		+" group by ADV_PROJECT.ADV_PROJECT_NAME";
+
+ PreparedStatement st= con.prepareStatement(query);
+ 
+	rs = st.executeQuery(query);
+	while(rs.next()){
+		jObj = new JsonObject();
+		jObj.addProperty("name", rs.getInt(1));
+		jObj.addProperty("impressions", rs.getString(2));
+		jArr.add(jObj);
+	}
+
+ }
+	con.close();
+	System.out.println(jArr.toString());
+  return jArr.toString();
+}	
 
 }
