@@ -1,5 +1,7 @@
 package tsofen.mythings.nobid;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,8 +30,8 @@ public class NoBidMethods {
 		
 		
        jArr = new JsonArray();
-		
-		rs = st.executeQuery("SELECT * FROM Updated.PRT_CAMPAIGN ");
+       System.out.println("Exhange Started");
+		rs = st.executeQuery("SELECT * FROM Updated.NOBID_PRT_CAMPAIGN;");
 		while(rs.next()){
 			jObj = new JsonObject();
 			jObj.addProperty("id", rs.getInt(1));
@@ -37,7 +39,7 @@ public class NoBidMethods {
 			jArr.add(jObj);
 		}
 		con.close();
-		
+		System.out.println("Exhange Finished");
         return jArr.toString();
 	}	
 	
@@ -46,14 +48,13 @@ public static String getNoBidReason(Connection con,String Exchangeid ) throws SQ
 		 ResultSet rs;
 		 JsonArray jArr;
 		 JsonObject jObj;
-//	System.out.println(Exchangeid);
        jArr = new JsonArray();
        int id = Integer.parseInt(Exchangeid);
        String query="select distinct REASON_TYPE.NO_BID_REASON_TYPE_ID , REASON_TYPE.NO_BID_REASON_TYPE from REASON_TYPE inner join NOBID_MAINTABLE on NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID=REASON_TYPE.NO_BID_REASON_TYPE_ID where NOBID_MAINTABLE.PRT_CAMPAIGN_ID=" +id;
        
        PreparedStatement st= con.prepareStatement(query);
-    // st.setInt(1, id);
-       
+ 
+       System.out.println("NoBid Started");
 		rs = st.executeQuery(query);
 		while(rs.next()){
 			jObj = new JsonObject();
@@ -62,7 +63,8 @@ public static String getNoBidReason(Connection con,String Exchangeid ) throws SQ
 			jArr.add(jObj);
 		}
 		con.close();
-		System.out.println(jArr.toString());
+		
+		 System.out.println("NoBid Finished");
         return jArr.toString();
 	}
 
@@ -108,7 +110,6 @@ public static String getExample(Connection con,String ExchangeId,String... noBid
  jArr = new JsonArray();
  int id = Integer.parseInt(ExchangeId);
  
- System.out.println(noBidId[0]);
 
  for(int i=0;i<noBidId.length;i++)
  {
@@ -120,18 +121,21 @@ public static String getExample(Connection con,String ExchangeId,String... noBid
 
  PreparedStatement st= con.prepareStatement(query);
  
+    System.out.println("Graph Started");
 	rs = st.executeQuery(query);
 	while(rs.next()){
 		jObj = new JsonObject();
-		jObj.addProperty("Advertiser", rs.getInt(1));
-	 	jObj.addProperty("Clicks", rs.getString(2));
+		jObj.addProperty("Advertiser", rs.getString(1));
+	 	jObj.addProperty("Clicks", rs.getInt(2));
 
 		jArr.add(jObj);
 	   }
 
      }
 	    con.close();
-	   System.out.println(jArr.toString());
+	    System.out.println("Graph Finished");
+	  System.out.println(jArr.toString());
+	
        return jArr.toString();
     }	
 

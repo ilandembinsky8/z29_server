@@ -1,11 +1,12 @@
 var jsonBarChartData;
 
 $(document).ready(function() {
-    // Load exchanges select input texts and values
-    $.get("getdata?func=getEx", function(data) {
-        var jsonData = JSON.parse(data);
-        for (var i = 0; i < jsonData.length; i++)
-            $('#exSelect').append($("<option></option>").attr("value", jsonData[i].id).text(jsonData[i].name));
+
+	// Load select input values
+	$.get("getdata?func=getEx", function(data){
+		var jsonData = JSON.parse(data);
+        for(var i = 0; i < jsonData.length; i++) 
+        	$('#exSelect').append($("<option></option>").attr("value",jsonData[i].id).text(jsonData[i].name)); 
     });
 });
 
@@ -17,17 +18,16 @@ $("#exSelect").change(function() {
     $('#noBidReason').append('<select class="form-control" id="noBidReasonSelect" name="multiselect[]" multiple="multiple">' +
         '</select></div></div>');
 
-
+    SelectedID = $("#exSelect option:selected").val();
     var exchSelectedID = $("#exSelect option:selected").val();
     // Load NoBids select input texts and values for a specific exchange
-    $.get("getdata?func=getNoBid&Exchangeid=" + exchSelectedID, function(data) {
-
+    $.get("getdata?func=getNoBid&exchID=" + exchSelectedID, function(data) {
 
         var jsonData = JSON.parse(data);
 
-        for (var i = 0; i < jsonData.length; i++) {
+        for (var i = 0; i < jsonData.length; i++) 
             $('#noBidReasonSelect').append($("<option></option>").attr("value", jsonData[i].id).text(jsonData[i].name));
-        }
+        
         $('#noBidReasonSelect').multiselect({
             nonSelectedText: 'Choose NoBids!',
             maxHeight: 200,
@@ -39,17 +39,18 @@ $("#exSelect").change(function() {
                 // alert('onSelectAll triggered!');
             },
             onChange: function() {
-               /* var selectedNoBidsValues = [];
-                $('#noBidReasonSelect :selected').each(function(i, selected) {
-                    selectedNoBidsValues[i] = $(selected).val();
-                    alert("selectedNoBidValue=" + selectedNoBidsValues[i]);
-                });*/
-                noBidSelectedID = $("#noBidReasonSelect option:selected").val();
-                //alert(noBidSelectedID);
-                $.get("getdata?func=getGraph&exchID=" + exchSelectedID+"&noBidID="+noBidSelectedID, function(data) {
-                	jsonBarChartData = JSON.parse(data);
-                });
-            }
+                /* var selectedNoBidsValues = [];
+                 $('#noBidReasonSelect :selected').each(function(i, selected) {
+                     selectedNoBidsValues[i] = $(selected).val();
+                     alert("selectedNoBidValue=" + selectedNoBidsValues[i]);
+                 });*/
+                 noBidSelectedID = $("#noBidReasonSelect option:selected").val();
+                 //alert(noBidSelectedID);
+                 $.get("getdata?func=getGraph&exchID=" + exchSelectedID+"&noBidID="+noBidSelectedID, function(data) {
+                	 jsonBarChartData = JSON.parse(data);
+                 	 drawBarChart();
+                 });
+             }
         });
     });
 });
@@ -63,12 +64,13 @@ function refreshMultiSelect() {
 
 }
 
-
 ////////////////////////////////////////
 /// BAR CHART JS
 ////////////////////////////////////////
 
+function drawBarChart(){
 //set the dimensions of the canvas
+	
 var margin = {top: 20, right: 20, bottom: 70, left: 40},
     width = 600 - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom;
@@ -90,31 +92,23 @@ var yAxis = d3.svg.axis()
     .orient("left")
     .ticks(10);
 
-
 // add the SVG element
-var svg = d3.select("#tree-container").append("svg")
+var svg = d3.select(".bar-chart").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", 
           "translate(" + margin.left + "," + margin.top + ")");
 
-//"data/barChartData.json"
 // load the data
-
-d3.json(jsonBarChartData, function(data){
- //});*/
-//d3.json(url, function(error, data) {
-
-    data.forEach(function(d) {
+d3.json(jsonBarChartData, function(error,data) {
+	jsonBarChartData.forEach(function(d) {
         d.Advertiser = d.Advertiser;
-        d.Clicks = +d.Clicks;
+        d.Count = +d.Count;
     });
-	
   // scale the range of the data
-  x.domain(data.map(function(d) { return d.Advertiser; }));
-  y.domain([0, d3.max(data, function(d) { return d.Clicks; })]);
-
+  x.domain(jsonBarChartData.map(function(d) { return d.Advertiser; }));
+  y.domain([0, d3.max(jsonBarChartData, function(d) { return d.Count; })]);
   // add axis
   svg.append("g")
       .attr("class", "x axis")
@@ -134,19 +128,29 @@ d3.json(jsonBarChartData, function(data){
       .attr("y", 5)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Amount");
+      .text("Count");
 
 
   // Add bar chart
   svg.selectAll("bar")
-      .data(data)
+      .data(jsonBarChartData)
     .enter().append("rect")
       .attr("class", "bar")
       .attr("x", function(d) { return x(d.Advertiser); })
       .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.Clicks); })
-      .attr("height", function(d) { return height - y(d.Clicks); });
+      .attr("y", function(d) { return y(d.Count); })
+      .attr("height", function(d) { return height - y(d.Count); });
 
 });
+}
+
+
+
+
+
+
+
+
+
 
 
