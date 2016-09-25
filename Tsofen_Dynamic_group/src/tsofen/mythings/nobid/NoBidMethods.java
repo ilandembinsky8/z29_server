@@ -1,5 +1,7 @@
 package tsofen.mythings.nobid;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -99,7 +101,7 @@ for(int i=0;i<noBidId.length;i++){
 */
 
 //Example
-public static String getExample(Connection con,String ExchangeId,String... noBidId ) throws SQLException{
+public static String getExample(Connection con,String ExchangeId,String... noBidId ) throws SQLException, IOException{
 	
 	 ResultSet rs;
 	 JsonArray jArr;
@@ -130,7 +132,12 @@ public static String getExample(Connection con,String ExchangeId,String... noBid
 
      }
 	    con.close();
-	   System.out.println(jArr.toString());
+	  
+		try (FileWriter file = new FileWriter("/Users/<username>/Documents/file1.txt")) {
+			file.write(jArr.toString());
+			
+			
+		}
        return jArr.toString();
     }	
 
