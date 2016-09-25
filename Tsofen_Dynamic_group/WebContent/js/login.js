@@ -1,5 +1,5 @@
 
-$("#btn_login").click(function(){
+$("#btn_login").click(function loginClicked(){
 	var id1 = $("#adminId").val();
 	var pass1 = $("#adminPass").val();
 	// Checking for blank fields.
