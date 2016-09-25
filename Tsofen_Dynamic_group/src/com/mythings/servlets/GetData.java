@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.mythings.db.MyConnection;
 import com.mythings.db.NoBidMethods;
 
@@ -16,12 +15,12 @@ import com.mythings.db.NoBidMethods;
  * Servlet implementation class HandlerServlet
  */
 @WebServlet("/getdata")
-public class HandlerServlet extends HttpServlet {
+public class GetData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     /**
      * Default constructor. 
      */
-    public HandlerServlet() { super(); }
+    public GetData() { super(); }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -29,17 +28,16 @@ public class HandlerServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		MyConnection con = null;
+		PrintWriter out;
+		
 		try {
 			con = new MyConnection();
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
-		PrintWriter out;
 		
 		try {
 			 
@@ -49,19 +47,19 @@ public class HandlerServlet extends HttpServlet {
 			if(func.equals("getEx"))
 				out.print(NoBidMethods.getExchange(con.getCon()));
 			if(func.equals("getNoBid")){
+				
 				String Exchangeid= request.getParameter("exchID");
-			
 				out.print(NoBidMethods.getNoBidReason(con.getCon(), Exchangeid));
 			}
 			else if(func.equals("getAd")){
+				
 				String Exchangeid= request.getParameter("exchID");
 				String nobid=request.getParameter("noBidID");
 			}
-
 			else if(func.equals("getGraph")){
+				
 				String Exchangeid= request.getParameter("exchID");
 				String nobid=request.getParameter("noBidID");
-				
 				out.print(NoBidMethods.getExample(con.getCon(), Exchangeid, nobid));
 			}
 
