@@ -1,4 +1,4 @@
-package tsofen.course.db;
+package com.mythings.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

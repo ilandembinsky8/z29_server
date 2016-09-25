@@ -1,4 +1,4 @@
-package tsofen.mythings.nobid;
+package com.mythings.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import tsofen.course.db.MyConnection;
+import com.mythings.db.MyConnection;
+import com.mythings.db.NoBidMethods;
 
 /**
  * Servlet implementation class HandlerServlet

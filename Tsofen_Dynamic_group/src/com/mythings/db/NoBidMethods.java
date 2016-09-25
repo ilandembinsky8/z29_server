@@ -1,7 +1,5 @@
-package tsofen.mythings.nobid;
+package com.mythings.db;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +15,6 @@ public class NoBidMethods {
 	
 	
 	private NoBidMethods(){}
-	
 	
 	
 	public static String getExchange(Connection con) throws SQLException{
@@ -68,8 +65,6 @@ public static String getNoBidReason(Connection con,String Exchangeid ) throws SQ
         return jArr.toString();
 	}
 
-
-/*
 public static String getAdv(Connection con,String ExchangeId,String... noBidId ) throws SQLException{
 	
 	 ResultSet rs;
@@ -98,7 +93,7 @@ for(int i=0;i<noBidId.length;i++){
    return jArr.toString();
 }	
 
-*/
+
 
 //Example
 public static String getExample(Connection con,String ExchangeId,String... noBidId ) throws SQLException{
