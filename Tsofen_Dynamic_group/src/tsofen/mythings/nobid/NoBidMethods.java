@@ -99,7 +99,7 @@ for(int i=0;i<noBidId.length;i++){
 */
 
 //Example
-public static String getImpressions(Connection con,String ExchangeId,String... noBidId ) throws SQLException{
+public static String getExample(Connection con,String ExchangeId,String... noBidId ) throws SQLException{
 	
 	 ResultSet rs;
 	 JsonArray jArr;
@@ -122,14 +122,14 @@ public static String getImpressions(Connection con,String ExchangeId,String... n
 	while(rs.next()){
 		jObj = new JsonObject();
 		jObj.addProperty("name", rs.getInt(1));
-		jObj.addProperty("impressions", rs.getString(2));
+	 	jObj.addProperty("impressions", rs.getString(2));
 		jArr.add(jObj);
-	}
+	   }
 
- }
-	con.close();
-	System.out.println(jArr.toString());
-  return jArr.toString();
-}	
+     }
+	    con.close();
+	   System.out.println(jArr.toString());
+       return jArr.toString();
+    }	
 
 }

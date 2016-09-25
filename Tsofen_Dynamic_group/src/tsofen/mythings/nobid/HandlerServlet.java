@@ -55,18 +55,15 @@ public class HandlerServlet extends HttpServlet {
 			else if(func.equals("getAd")){
 				String Exchangeid= request.getParameter("Exchangeid");
 				String nobid=request.getParameter("noBidReason");
-				
-				
-//				out.print(NoBidMethods.getAdv(con.getCon(), Exchangeid, nobid));
-			}else if(func.equals("getGraph")){
+			}
+
+			else if(func.equals("getGraph")){
 				String Exchangeid= request.getParameter("Exchangeid");
 				String nobid=request.getParameter("noBidReason");
 				
 				out.print(NoBidMethods.getExample(con.getCon(), Exchangeid, nobid));
 			}
-//			else if(func.equals("getAdvForEx"))
-//				out.print(um.getAdvForEx(Integer.parseInt(request.getParameter("exID"))));
-//			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
