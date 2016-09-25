@@ -31,8 +31,8 @@ var svg = d3.select("#tree-container").append("svg")
 
 //"data/barChartData.json"
 // load the data
-var url = "data/barChartData.json";
-d3.json(url, function(data){
+
+d3.json('', function(data){
  //});*/
 //d3.json(url, function(error, data) {
 

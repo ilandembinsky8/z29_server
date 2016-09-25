@@ -19,7 +19,7 @@ $("#exSelect").change(function() {
 
     var exchSelectedID = $("#exSelect option:selected").val();
     // Load NoBids select input texts and values for a specific exchange
-    $.get("getdata?func=getNoBidReasons&exchID=" + exchSelectedID, function(data) {
+    $.get("getdata?func=getNoBid&Exchangeid=" + exchSelectedID, function(data) {
 
 
         var jsonData = JSON.parse(data);
