@@ -30,74 +30,18 @@ select {
 	overflow-y: auto;
 }
 
-.bar{
-    fill: steelblue;
-}
-
-.bar:hover{
-    fill: brown;
-}
-
-.axis {
-    font: 10px sans-serif;
-}
-
-.axis path,
-.axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-}
 
 @media(max-width: 1200px){
-    .margin-bottom-6 {
-            margin-bottom: 6px;
+	
+	.margin-bottom-6 {
+		margin-bottom: 6px;
 	}
 }
 
 @media(max-width: 768px){
+	
 	.col-sm-2 {
-            text-align: left;
+		text-align: left;
 	}
 }
 
-
-/*tree css*/
-.node {
-    cursor: pointer;
-  }
-
-  .overlay{
-      background-color:#EEE;
-  }
-   
-  .node circle {
-    fill: #fff;
-    stroke: steelblue;
-    stroke-width: 1.5px;
-  }
-   
-  .node text {
-    font-size:10px; 
-    font-family:sans-serif;
-  }
-   
-  .link {
-    fill: none;
-    stroke: #ccc;
-    stroke-width: 1.5px;
-  }
-
-  .templink {
-    fill: none;
-    stroke: red;
-    stroke-width: 3px;
-  }
-
-  .ghostCircle.show{
-      display:block;
-  }
-
-  .ghostCircle, .activeDrag .ghostCircle{
-       display: none;
-  }
