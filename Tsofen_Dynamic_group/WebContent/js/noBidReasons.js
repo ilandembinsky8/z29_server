@@ -16,7 +16,7 @@ $("#exSelect").change(function() {
     $('#noBidReason').append('<select class="form-control" id="noBidReasonSelect" name="multiselect[]" multiple="multiple">' +
         '</select></div></div>');
 
-SelectedID = $("#exSelect option:selected").val();;
+
     var exchSelectedID = $("#exSelect option:selected").val();
     // Load NoBids select input texts and values for a specific exchange
     $.get("getdata?func=getNoBidReasons&exchID=" + exchSelectedID, function(data) {
@@ -38,18 +38,24 @@ SelectedID = $("#exSelect option:selected").val();;
                 // alert('onSelectAll triggered!');
             },
             onChange: function() {
-                var selectedNoBidsValues = [];
+               /* var selectedNoBidsValues = [];
                 $('#noBidReasonSelect :selected').each(function(i, selected) {
                     selectedNoBidsValues[i] = $(selected).val();
                     alert("selectedNoBidValue=" + selectedNoBidsValues[i]);
-                });
+                });*/
+                noBidSelectedID = $("#noBidReasonSelect option:selected").val();
+                //alert(noBidSelectedID);
+                $.get("getdata?func=getGraph&exchID=" + exchSelectedID+"&noBidID="+noBidSelectedID, function(data) {
+               // jsonBarChartData = JSON.parse(data);
                 
+                
+                });
             }
         });
     });
 });
 
-
+function getBarChartData(){return jsonBarChartData;}
 
 function refreshMultiSelect() {
 

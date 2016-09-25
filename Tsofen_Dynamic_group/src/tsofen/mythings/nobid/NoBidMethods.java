@@ -107,12 +107,14 @@ public static String getExample(Connection con,String ExchangeId,String... noBid
 	 String query="";
  jArr = new JsonArray();
  int id = Integer.parseInt(ExchangeId);
+ 
+ System.out.println(noBidId[0]);
 
  for(int i=0;i<noBidId.length;i++)
  {
  query="SELECT ADV_PROJECT.ADV_PROJECT_NAME , sum(NOBID_MAINTABLE.CNT)"
 		+" FROM ADV_PROJECT,NOBID_MAINTABLE"
-		+" WHERE NOBID_MAINTABLE.PRT_CAMPAIGN_ID="+ id+"AND NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID="+noBidId[i]
+		+" WHERE NOBID_MAINTABLE.PRT_CAMPAIGN_ID="+id+" AND NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID="+noBidId[i]
 		+" and ADV_PROJECT.ADV_PROJECT_ID = NOBID_MAINTABLE.ADV_PROJECT_ID"
 		+" group by ADV_PROJECT.ADV_PROJECT_NAME";
 
@@ -123,6 +125,7 @@ public static String getExample(Connection con,String ExchangeId,String... noBid
 		jObj = new JsonObject();
 		jObj.addProperty("Advertiser", rs.getInt(1));
 	 	jObj.addProperty("Clicks", rs.getString(2));
+
 		jArr.add(jObj);
 	   }
 
