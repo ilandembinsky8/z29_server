@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.mythings.db.MyConnection;
 import com.mythings.db.NoBidMethods;
 
@@ -28,16 +29,17 @@ public class GetData extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		MyConnection con = null;
-		PrintWriter out;
-		
 		try {
 			con = new MyConnection();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 
+		PrintWriter out;
 		
 		try {
 			 
@@ -47,21 +49,37 @@ public class GetData extends HttpServlet {
 			if(func.equals("getEx"))
 				out.print(NoBidMethods.getExchange(con.getCon()));
 			if(func.equals("getNoBid")){
-				
 				String Exchangeid= request.getParameter("exchID");
+			
 				out.print(NoBidMethods.getNoBidReason(con.getCon(), Exchangeid));
 			}
 			else if(func.equals("getAd")){
-				
 				String Exchangeid= request.getParameter("exchID");
 				String nobid=request.getParameter("noBidID");
 			}
-			else if(func.equals("getGraph")){
-				
+			else if(func.equals("get�AdvCompaign")){
 				String Exchangeid= request.getParameter("exchID");
 				String nobid=request.getParameter("noBidID");
-				out.print(NoBidMethods.getExample(con.getCon(), Exchangeid, nobid));
+				String Advcampid=request.getParameter("Advcampid");
+
+				out.print(NoBidMethods.getAdvCompaign(con.getCon(), Exchangeid, nobid,Advcampid));
+
 			}
+			else if(func.equals("get�AdGroup")){
+				String Exchangeid= request.getParameter("exchID");
+				String nobid=request.getParameter("noBidID");
+				String Advcampid=request.getParameter("Advcampid");
+				String idCompaign=request.getParameter("idCompaign");
+
+				out.print(NoBidMethods.getAdGroup(con.getCon(),Exchangeid,nobid,Advcampid,idCompaign));
+
+			}
+
+//			else if(func.equals("getGraph")){
+//				String Exchangeid= request.getParameter("exchID");
+//				String nobid=request.getParameter("noBidID");
+//				out.print(NoBidMethods.getExample(con.getCon(), Exchangeid, nobid));
+//			}
 
 		} catch (IOException e) {
 			e.printStackTrace();
