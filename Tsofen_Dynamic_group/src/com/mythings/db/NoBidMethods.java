@@ -87,14 +87,14 @@ for(int i=0;i<noBidId.length;i++){
 	rs = st.executeQuery(query);
 	while(rs.next()){
 		jObj = new JsonObject();
-		jObj.addProperty("id", rs.getInt(1));
+//		jObj.addProperty("id", rs.getInt(1));
 		jObj.addProperty("name", rs.getString(2));
 		jArr.add(jObj);
 	}
 }
 	//con.close();
 	System.out.println(jArr.toString());
-   return jArr.toString();
+   return "{"+"\"name\":\"Global\",\"children\":" + jArr.toString() + "}";
 }	
 
 public static String getAdvCompaign(Connection con,String exchangeId,String noBidId, String advertiserid) throws SQLException{
@@ -159,7 +159,29 @@ PreparedStatement st= con.prepareStatement(query);
 	System.out.println(jArr.toString());
  return jArr.toString();
 }
+/*public static String getTree(Connection con,String exchangeId,String noBidId ) throws SQLException{
+	
+	 ResultSet rs;
+	 JsonArray jArr;
+	 JsonObject jObj;
+	 String query="";
+jArr = new JsonArray();
+int id = Integer.parseInt(exchangeId);
 
+
+
+
+		jObj = new JsonObject();
+		jObj.addProperty("Advertiser", rs.getString(1));
+	 	jObj.addProperty("Clicks", rs.getInt(2));
+
+		jArr.add(jObj);
+	   }
+   
+
+	   // con.close();	
+      return jArr.toString();
+   }	*/
 
 //Example
 public static String getExample(Connection con,String exchangeId,String... noBidId ) throws SQLException{

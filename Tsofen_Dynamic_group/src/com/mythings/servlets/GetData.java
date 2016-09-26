@@ -68,8 +68,9 @@ public class GetData extends HttpServlet {
 				out.print(NoBidMethods.getNoBidReason(con.getCon(), Exchangeid));
 			}
 			else if(func.equals("getAd")){
-				//String exchangeid= request.getParameter("exchID");
-				//String nobid=request.getParameter("noBidID");
+				String exchangeid= request.getParameter("exchID");
+				String nobid=request.getParameter("noBidID");
+				out.print(NoBidMethods.getAdv(con.getCon(), exchangeid, nobid));
 			}
 			else if(func.equals("getAdvCompaign")){
 				String Exchangeid= request.getParameter("exchID");

@@ -1,3 +1,4 @@
+var jsonData;
 var height = 650;
 var maxLabel = 150;
 var duration = 500;
@@ -18,7 +19,11 @@ var svg = d3.select(".tree").append("svg")
         .append("g")
         .attr("transform", "translate(" + maxLabel + ",0)");
 
-root = json;
+$.get("getdata?func=getAd&exchID=10159&noBidID=600", function(data){
+	jsonData = JSON.parse(data);});
+	
+root = jsonData;
+alert(root);
 root.x0 = height / 2;
 root.y0 = 0;
 
