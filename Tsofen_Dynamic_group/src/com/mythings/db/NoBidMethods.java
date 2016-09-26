@@ -34,7 +34,8 @@ public class NoBidMethods {
 			jObj.addProperty("name", rs.getString(2));
 			jArr.add(jObj);
 		}
-		//con.close();
+		System.out.println("Exhange Finished");
+	
         return jArr.toString();
 	}	
 	
@@ -60,7 +61,7 @@ public static String getNoBidReason(Connection con,String exchangeid ) throws SQ
 			jObj.addProperty("name", rs.getString(2));
 			jArr.add(jObj);
 		}
-		//con.close();
+	
 		
 		 System.out.println("NoBid Finished");
         return jArr.toString();
@@ -72,13 +73,13 @@ public static String getAdv(Connection con,String exchangeId,String... noBidId )
 	 JsonArray jArr;
 	 JsonObject jObj;
 	 String query="";
-//System.out.println(ExchangeId);
-  jArr = new JsonArray();
-  int id = Integer.parseInt(exchangeId);
 
+	 jArr = new JsonArray();
+  //int id = Integer.parseInt(exchangeId);
+  System.out.println("getAdv Started");
 for(int i=0;i<noBidId.length;i++){
   query="SELECT DISTINCT ADV_PROJECT.ADV_PROJECT_ID,ADV_PROJECT.ADV_PROJECT_NAME FROM "
-  		+ "ADV_PROJECT,NOBID_MAINTABLE WHERE NOBID_MAINTABLE.PRT_CAMPAIGN_ID="+id+" AND "
+  		+ "ADV_PROJECT,NOBID_MAINTABLE WHERE NOBID_MAINTABLE.PRT_CAMPAIGN_ID="+exchangeId+" AND "
   				+ "NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID="+noBidId[i]+" AND "
   						+ "ADV_PROJECT.ADV_PROJECT_ID=NOBID_MAINTABLE.ADV_PROJECT_ID";
 
@@ -92,21 +93,23 @@ for(int i=0;i<noBidId.length;i++){
 		jArr.add(jObj);
 	}
 }
-	//con.close();
 	System.out.println(jArr.toString());
    return "{"+"\"name\":\"Global\",\"children\":" + jArr.toString() + "}";
 }	
 
-public static String getAdvCompaign(Connection con,String exchangeId,String noBidId, String advertiserid) throws SQLException{
+public static String getAdvCampaign(Connection con,String exchangeId,String noBidId, String advertiserid) throws SQLException{
 	
 	 ResultSet rs;
 	 JsonArray jArr;
 	 JsonObject jObj;
 	 String query="";
-//System.out.println(ExchangeId);
+
  jArr = new JsonArray();
  int id = Integer.parseInt(exchangeId);
  int idAdv=Integer.parseInt(advertiserid);
+ 
+ System.out.println(" getAdvCampaign Started");
+ 
  query="select distinct ADV_CAMPAIGN.ADV_CAMPAIGN_ID,ADV_CAMPAIGN.ADV_CAMPAIGN_NAME"+""
 		+" from ADV_PROJECT,NOBID_MAINTABLE,ADV_CAMPAIGN "
 		+" where NOBID_MAINTABLE.ADV_PROJECT_ID=ADV_PROJECT.ADV_PROJECT_ID and "
@@ -124,28 +127,27 @@ public static String getAdvCompaign(Connection con,String exchangeId,String noBi
 		jArr.add(jObj);
 	}
 
-	//con.close();
-	System.out.println(jArr.toString());
+	 System.out.println(" getAdvCampaign Finished");
   return jArr.toString();
 }
-public static String getAdGroup(Connection con,String exchangeId,String noBidId, String advertiserid,String id_compaign) throws SQLException{
+public static String getAdGroup(Connection con,String exchangeId,String noBidId, String advertiserid,String idCampaign) throws SQLException{
 	
 	 ResultSet rs;
 	 JsonArray jArr;
 	 JsonObject jObj;
 	 String query="";
-//System.out.println(ExchangeId);
 jArr = new JsonArray();
 int id = Integer.parseInt(exchangeId);
 int idAdv=Integer.parseInt(advertiserid);
-int idCompaign=Integer.parseInt(id_compaign);
+int idCamp=Integer.parseInt(idCampaign);
+System.out.println(" getAdGroup Started");
 query= "select distinct ADGROUP.ADGROUP_ID ,ADGROUP.AD_GROUP_NAME"
 		+ " from ADV_PROJECT,NOBID_MAINTABLE,ADV_CAMPAIGN,ADGROUP"
 		+ " where NOBID_MAINTABLE.ADV_PROJECT_ID=ADV_PROJECT.ADV_PROJECT_ID"
 		+" and NOBID_MAINTABLE.ADV_CAMPAIGN_ID=ADV_CAMPAIGN.ADV_CAMPAIGN_ID"
 		+" and NOBID_MAINTABLE.ADGROUP_ID=ADGROUP.ADGROUP_ID"
 		+" and NOBID_MAINTABLE.PRT_CAMPAIGN_ID="+id+" and NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID="+noBidId
-		+" and ADV_PROJECT.ADV_PROJECT_ID="+idAdv+" and ADV_CAMPAIGN.ADV_CAMPAIGN_ID="+idCompaign;
+		+" and ADV_PROJECT.ADV_PROJECT_ID="+idAdv+" and ADV_CAMPAIGN.ADV_CAMPAIGN_ID="+idCamp;
 PreparedStatement st= con.prepareStatement(query);
 	rs = st.executeQuery(query);
 	while(rs.next()){
@@ -155,8 +157,7 @@ PreparedStatement st= con.prepareStatement(query);
 		jArr.add(jObj);
 	}
 
-	//con.close();
-	System.out.println(jArr.toString());
+	System.out.println(" getAdGroup Finished");
  return jArr.toString();
 }
 /*public static String getTree(Connection con,String exchangeId,String noBidId ) throws SQLException{
@@ -179,9 +180,69 @@ int id = Integer.parseInt(exchangeId);
 	   }
    
 
-	   // con.close();	
+
       return jArr.toString();
    }	*/
+public static String  getCreatives(Connection con,String exchangeId,String noBidId, String advId,String idCampaign,String adGroup) throws SQLException{
+	
+	 ResultSet rs;
+	 JsonArray jArr;
+	 JsonObject jObj;
+	 Statement st =  con.createStatement();
+	 jArr = new JsonArray();
+	 System.out.println("getCreatives Started");
+	String query="select distinct ADV_PROJECT_CREATIVE.CREATIVE_NAME,ADV_PROJECT_CREATIVE.ADV_PROJECT_CREATIVE_ID"+
+"from ADV_PROJECT,NOBID_MAINTABLE,ADV_CAMPAIGN,ADGROUP,ADV_PROJECT_CREATIVE"+
+"where NOBID_MAINTABLE.ADV_PROJECT_ID=ADV_PROJECT.ADV_PROJECT_ID and NOBID_MAINTABLE.ADV_CAMPAIGN_ID=ADV_CAMPAIGN.ADV_CAMPAIGN_ID and"+
+"NOBID_MAINTABLE.ADGROUP_ID=ADGROUP.ADGROUP_ID and NOBID_MAINTABLE.ADV_PROJECT_CREATIVE_ID=ADV_PROJECT_CREATIVE.ADV_PROJECT_CREATIVE_ID"+
+"and NOBID_MAINTABLE.PRT_CAMPAIGN_ID="+exchangeId+" and NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID="+noBidId+" and ADV_PROJECT.ADV_PROJECT_ID="+advId+" and ADV_CAMPAIGN.ADV_CAMPAIGN_ID="+idCampaign+" and ADGROUP.ADGROUP_ID="+adGroup+"";
+	rs = st.executeQuery(query);
+	while(rs.next()){
+		jObj=new JsonObject();
+		jObj.addProperty("Creative Name", rs.getInt(1));
+		jObj.addProperty("Adv Id", rs.getString(2));
+		jArr.add(jObj);
+		
+		
+	}
+	 System.out.println("getCreatives Finished");
+	 return jArr.toString();
+}
+
+
+
+public static String  getGraph(Connection con,String exchangeId,String noBidId, String advId,String idCampaign,String adGroup,String creativeId) throws SQLException{
+	
+	 ResultSet rs;
+	 JsonArray jArr;
+	 JsonObject jObj;
+	 Statement st =  con.createStatement();
+	 jArr = new JsonArray();
+	 System.out.println("getCreatives Started");
+	String query="SELECT NOBID_MAINTABLE.EVENT_HOUR, SUM(NOBID_MAINTABLE.CNT) AS COUNTER"+
+"FROM ADV_PROJECT,NOBID_MAINTABLE,ADV_CAMPAIGN,ADGROUP,ADV_PROJECT_CREATIVE"+
+"WHERE  NOBID_MAINTABLE.ADV_PROJECT_ID=ADV_PROJECT.ADV_PROJECT_ID and"+
+ "NOBID_MAINTABLE.ADV_CAMPAIGN_ID=ADV_CAMPAIGN.ADV_CAMPAIGN_ID "+
+ "and NOBID_MAINTABLE.ADGROUP_ID=ADGROUP.ADGROUP_ID "+
+" and NOBID_MAINTABLE.ADV_PROJECT_CREATIVE_ID=ADV_PROJECT_CREATIVE.ADV_PROJECT_CREATIVE_ID"+
+"and NOBID_MAINTABLE.PRT_CAMPAIGN_ID="+exchangeId+" and NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID="+noBidId+""+ 
+"and ADV_PROJECT.ADV_PROJECT_ID="+advId+" and ADV_CAMPAIGN.ADV_CAMPAIGN_ID="+idCampaign+" and "+
+"ADGROUP.ADGROUP_ID="+adGroup+" AND NOBID_MAINTABLE.ADV_PROJECT_CREATIVE_ID="+creativeId+"GROUP BY EVENT_HOUR" ;
+
+	rs = st.executeQuery(query);
+	while(rs.next()){
+		jObj=new JsonObject();
+		jObj.addProperty("Creative Name", rs.getInt(1));
+		jObj.addProperty("Adv Id", rs.getString(2));
+		jArr.add(jObj);
+		
+		
+	}
+	 System.out.println("getCreatives Finished");
+	 return jArr.toString();
+}
+
+
 
 //Example
 public static String getExample(Connection con,String exchangeId,String... noBidId ) throws SQLException{
@@ -193,7 +254,7 @@ public static String getExample(Connection con,String exchangeId,String... noBid
  jArr = new JsonArray();
  int id = Integer.parseInt(exchangeId);
  
-
+ System.out.println("Graph Started");
  for(int i=0;i<noBidId.length;i++)
  {
  query="SELECT ADV_PROJECT.ADV_PROJECT_NAME , sum(NOBID_MAINTABLE.CNT)"
@@ -204,19 +265,19 @@ public static String getExample(Connection con,String exchangeId,String... noBid
 
  PreparedStatement st= con.prepareStatement(query);
  
-    System.out.println("Graph Started");
+    
 	rs = st.executeQuery(query);
 	while(rs.next()){
 		jObj = new JsonObject();
-		jObj.addProperty("Advertiser", rs.getString(1));
-	 	jObj.addProperty("Clicks", rs.getInt(2));
+		jObj.addProperty("Event_Hour", rs.getString(1));
+	 	jObj.addProperty("Counter", rs.getInt(2));
 
 		jArr.add(jObj);
 	   }
      }
-	   // con.close();
+	  
 	    System.out.println("Graph Finished");
-	  System.out.println(jArr.toString());
+	
 	
        return jArr.toString();
     }	
