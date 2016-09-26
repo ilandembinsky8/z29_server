@@ -34,18 +34,21 @@ public class NoBidMethods {
 			jObj.addProperty("name", rs.getString(2));
 			jArr.add(jObj);
 		}
-		con.close();
+		//con.close();
         return jArr.toString();
 	}	
 	
-public static String getNoBidReason(Connection con,String Exchangeid ) throws SQLException{
+public static String getNoBidReason(Connection con,String exchangeid ) throws SQLException{
 		
 		 ResultSet rs;
 		 JsonArray jArr;
 		 JsonObject jObj;
        jArr = new JsonArray();
-       int id = Integer.parseInt(Exchangeid);
-       String query="select distinct REASON_TYPE.NO_BID_REASON_TYPE_ID , REASON_TYPE.NO_BID_REASON_TYPE from REASON_TYPE inner join NOBID_MAINTABLE on NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID=REASON_TYPE.NO_BID_REASON_TYPE_ID where NOBID_MAINTABLE.PRT_CAMPAIGN_ID=" +id;
+       int id = Integer.parseInt(exchangeid);
+       String query="select distinct REASON_TYPE.NO_BID_REASON_TYPE_ID , "
+       		+ "REASON_TYPE.NO_BID_REASON_TYPE from REASON_TYPE inner join NOBID_MAINTABLE"
+       		+ " on NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID=REASON_TYPE.NO_BID_REASON_TYPE_ID "
+       		+ "where NOBID_MAINTABLE.PRT_CAMPAIGN_ID=" +id;
        
        PreparedStatement st= con.prepareStatement(query);
  
@@ -57,13 +60,13 @@ public static String getNoBidReason(Connection con,String Exchangeid ) throws SQ
 			jObj.addProperty("name", rs.getString(2));
 			jArr.add(jObj);
 		}
-		con.close();
+		//con.close();
 		
 		 System.out.println("NoBid Finished");
         return jArr.toString();
 	}
 
-public static String getAdv(Connection con,String ExchangeId,String... noBidId ) throws SQLException{
+public static String getAdv(Connection con,String exchangeId,String... noBidId ) throws SQLException{
 	
 	 ResultSet rs;
 	 JsonArray jArr;
@@ -71,10 +74,13 @@ public static String getAdv(Connection con,String ExchangeId,String... noBidId )
 	 String query="";
 //System.out.println(ExchangeId);
   jArr = new JsonArray();
-  int id = Integer.parseInt(ExchangeId);
+  int id = Integer.parseInt(exchangeId);
 
 for(int i=0;i<noBidId.length;i++){
-  query="SELECT DISTINCT ADV_PROJECT.ADV_PROJECT_ID,ADV_PROJECT.ADV_PROJECT_NAME FROM ADV_PROJECT,NOBID_MAINTABLE WHERE NOBID_MAINTABLE.PRT_CAMPAIGN_ID="+id+" AND NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID="+noBidId[i]+" AND ADV_PROJECT.ADV_PROJECT_ID=NOBID_MAINTABLE.ADV_PROJECT_ID";
+  query="SELECT DISTINCT ADV_PROJECT.ADV_PROJECT_ID,ADV_PROJECT.ADV_PROJECT_NAME FROM "
+  		+ "ADV_PROJECT,NOBID_MAINTABLE WHERE NOBID_MAINTABLE.PRT_CAMPAIGN_ID="+id+" AND "
+  				+ "NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID="+noBidId[i]+" AND "
+  						+ "ADV_PROJECT.ADV_PROJECT_ID=NOBID_MAINTABLE.ADV_PROJECT_ID";
 
   PreparedStatement st= con.prepareStatement(query);
   
@@ -86,12 +92,12 @@ for(int i=0;i<noBidId.length;i++){
 		jArr.add(jObj);
 	}
 }
-	con.close();
+	//con.close();
 	System.out.println(jArr.toString());
    return jArr.toString();
 }	
 
-public static String getAdvCompaign(Connection con,String ExchangeId,String noBidId, String advertiserid) throws SQLException{
+public static String getAdvCompaign(Connection con,String exchangeId,String noBidId, String advertiserid) throws SQLException{
 	
 	 ResultSet rs;
 	 JsonArray jArr;
@@ -99,7 +105,7 @@ public static String getAdvCompaign(Connection con,String ExchangeId,String noBi
 	 String query="";
 //System.out.println(ExchangeId);
  jArr = new JsonArray();
- int id = Integer.parseInt(ExchangeId);
+ int id = Integer.parseInt(exchangeId);
  int idAdv=Integer.parseInt(advertiserid);
  query="select distinct ADV_CAMPAIGN.ADV_CAMPAIGN_ID,ADV_CAMPAIGN.ADV_CAMPAIGN_NAME"+""
 		+" from ADV_PROJECT,NOBID_MAINTABLE,ADV_CAMPAIGN "
@@ -118,11 +124,11 @@ public static String getAdvCompaign(Connection con,String ExchangeId,String noBi
 		jArr.add(jObj);
 	}
 
-	con.close();
+	//con.close();
 	System.out.println(jArr.toString());
   return jArr.toString();
 }
-public static String getAdGroup(Connection con,String ExchangeId,String noBidId, String advertiserid,String id_compaign) throws SQLException{
+public static String getAdGroup(Connection con,String exchangeId,String noBidId, String advertiserid,String id_compaign) throws SQLException{
 	
 	 ResultSet rs;
 	 JsonArray jArr;
@@ -130,7 +136,7 @@ public static String getAdGroup(Connection con,String ExchangeId,String noBidId,
 	 String query="";
 //System.out.println(ExchangeId);
 jArr = new JsonArray();
-int id = Integer.parseInt(ExchangeId);
+int id = Integer.parseInt(exchangeId);
 int idAdv=Integer.parseInt(advertiserid);
 int idCompaign=Integer.parseInt(id_compaign);
 query= "select distinct ADGROUP.ADGROUP_ID ,ADGROUP.AD_GROUP_NAME"
@@ -149,21 +155,21 @@ PreparedStatement st= con.prepareStatement(query);
 		jArr.add(jObj);
 	}
 
-	con.close();
+	//con.close();
 	System.out.println(jArr.toString());
  return jArr.toString();
 }
 
 
 //Example
-public static String getExample(Connection con,String ExchangeId,String... noBidId ) throws SQLException{
+public static String getExample(Connection con,String exchangeId,String... noBidId ) throws SQLException{
 	
 	 ResultSet rs;
 	 JsonArray jArr;
 	 JsonObject jObj;
 	 String query="";
  jArr = new JsonArray();
- int id = Integer.parseInt(ExchangeId);
+ int id = Integer.parseInt(exchangeId);
  
 
  for(int i=0;i<noBidId.length;i++)
@@ -186,7 +192,7 @@ public static String getExample(Connection con,String ExchangeId,String... noBid
 		jArr.add(jObj);
 	   }
      }
-	    con.close();
+	   // con.close();
 	    System.out.println("Graph Finished");
 	  System.out.println(jArr.toString());
 	

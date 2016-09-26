@@ -56,7 +56,7 @@ $("#exSelect").change(function() {
     $('#noBidReason').append('<select class="form-control" id="noBidReasonSelect" name="multiselect[]" multiple="multiple">' +
         '</select></div></div>');
 
-    SelectedID = $("#exSelect option:selected").val();
+    //SelectedID = $("#exSelect option:selected").val();
     var exchSelectedID = $("#exSelect option:selected").val();
     // Load NoBids select input texts and values for a specific exchange
     $.get("getdata?func=getNoBid&exchID=" + exchSelectedID, function(data) {
