@@ -1,53 +1,3 @@
-var json = 
-{
-    "name": "Base",
-    "children": [
-        {
-            "name": "Type Aa",
-            "children": [
-                {
-                    "name": "Section 1",
-                    "children": [
-                        {"name": "Child 1"},
-                        {"name": "Child 2"},
-                        {"name": "Child 3"}
-                    ]
-                },
-                {
-                    "name": "Section 2",
-                    "children": [
-                        {"name": "Child 1"},
-                        {"name": "Child 2"},
-                        {"name": "Child 3"}
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "Type B",
-            "children": [
-                {
-                    "name": "Section 1",
-                    "children": [
-                        {"name": "Child 1"},
-                        {"name": "Child 2"},
-                        {"name": "Child 3"}
-                    ]
-                },
-                {
-                    "name": "Section 2",
-                    "children": [
-                        {"name": "Child 1"},
-                        {"name": "Child 2"},
-                        {"name": "Child 3"}
-                    ]
-                }
-            ]
-        }
-    ]
-};
-
-var width = 700;
 var height = 650;
 var maxLabel = 150;
 var duration = 500;
@@ -57,13 +7,13 @@ var i = 0;
 var root;
 
 var tree = d3.layout.tree()
-    .size([height, width]);
+    .size([height]);
 
 var diagonal = d3.svg.diagonal()
     .projection(function(d) { return [d.y, d.x]; });
 
-var svg = d3.select("#tree-container").append("svg")
-    .attr("width", width)
+var svg = d3.select(".tree").append("svg")
+    .attr("width", "100%")
     .attr("height", height)
         .append("g")
         .attr("transform", "translate(" + maxLabel + ",0)");

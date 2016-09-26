@@ -16,16 +16,9 @@ public class MyConnection {
 	public MyConnection() throws ClassNotFoundException, SQLException{
 		
 		Class.forName("com.mysql.jdbc.Driver");
-		con = DriverManager.getConnection(url ,username ,pass);
-//		connectToDB(); 
-		
+		con = DriverManager.getConnection(url ,username ,pass); 
 	}
 	
-//	private void connectToDB() throws SQLException{
-//		con = DriverManager.getConnection(url ,username ,pass);
-//		//st =  con.createStatement();
-//	}
-
 
 	public Connection getCon(){
 		return con;

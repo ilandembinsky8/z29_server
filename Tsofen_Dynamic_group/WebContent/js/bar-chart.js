@@ -1,4 +1,10 @@
-// set the dimensions of the canvas
+////////////////////////////////////////
+/// BAR CHART JS
+////////////////////////////////////////
+
+function drawBarChart(){
+//set the dimensions of the canvas
+	
 var margin = {top: 20, right: 20, bottom: 70, left: 40},
     width = 600 - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom;
@@ -20,7 +26,6 @@ var yAxis = d3.svg.axis()
     .orient("left")
     .ticks(10);
 
-
 // add the SVG element
 var svg = d3.select(".bar-chart").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -29,19 +34,15 @@ var svg = d3.select(".bar-chart").append("svg")
     .attr("transform", 
           "translate(" + margin.left + "," + margin.top + ")");
 
-
 // load the data
-d3.json('data.json', function(error, data) {
-
-    data.forEach(function(d) {
+d3.json(jsonBarChartData, function(error,data) {
+	jsonBarChartData.forEach(function(d) {
         d.Advertiser = d.Advertiser;
         d.Count = +d.Count;
     });
-	
   // scale the range of the data
-  x.domain(data.map(function(d) { return d.Advertiser; }));
-  y.domain([0, d3.max(data, function(d) { return d.Count; })]);
-
+  x.domain(jsonBarChartData.map(function(d) { return d.Advertiser; }));
+  y.domain([0, d3.max(jsonBarChartData, function(d) { return d.Count; })]);
   // add axis
   svg.append("g")
       .attr("class", "x axis")
@@ -66,7 +67,7 @@ d3.json('data.json', function(error, data) {
 
   // Add bar chart
   svg.selectAll("bar")
-      .data(data)
+      .data(jsonBarChartData)
     .enter().append("rect")
       .attr("class", "bar")
       .attr("x", function(d) { return x(d.Advertiser); })
@@ -75,3 +76,4 @@ d3.json('data.json', function(error, data) {
       .attr("height", function(d) { return height - y(d.Count); });
 
 });
+}
