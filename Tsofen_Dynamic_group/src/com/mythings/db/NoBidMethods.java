@@ -20,6 +20,7 @@ public class NoBidMethods {
 	public static String getExchange(Connection con) throws SQLException{
 		
 		Statement st =  con.createStatement();
+
 		 ResultSet rs;
 		 JsonArray jArr;
 		 JsonObject jObj;
@@ -35,6 +36,7 @@ public class NoBidMethods {
 			jArr.add(jObj);
 		}
 		con.close();
+		System.out.println("Exhange Finished");
         return jArr.toString();
 	}	
 	
@@ -91,68 +93,6 @@ for(int i=0;i<noBidId.length;i++){
    return jArr.toString();
 }	
 
-public static String getöAdvCompaign(Connection con,String ExchangeId,String noBidId, String advertiserid) throws SQLException{
-	
-	 ResultSet rs;
-	 JsonArray jArr;
-	 JsonObject jObj;
-	 String query="";
-//System.out.println(ExchangeId);
- jArr = new JsonArray();
- int id = Integer.parseInt(ExchangeId);
- int idAdv=Integer.parseInt(advertiserid);
- query="select distinct ADV_CAMPAIGN.ADV_CAMPAIGN_ID,ADV_CAMPAIGN.ADV_CAMPAIGN_NAME"+""
-		+" from ADV_PROJECT,NOBID_MAINTABLE,ADV_CAMPAIGN "
-		+" where NOBID_MAINTABLE.ADV_PROJECT_ID=ADV_PROJECT.ADV_PROJECT_ID and "
-		+"NOBID_MAINTABLE.ADV_CAMPAIGN_ID=ADV_CAMPAIGN.ADV_CAMPAIGN_ID "
-		+"and NOBID_MAINTABLE.PRT_CAMPAIGN_ID="+id+" AND NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID="+noBidId+
-		" and ADV_PROJECT.ADV_PROJECT_ID="+idAdv;
-
- PreparedStatement st= con.prepareStatement(query);
- 
-	rs = st.executeQuery(query);
-	while(rs.next()){
-		jObj = new JsonObject();
-		jObj.addProperty("id", rs.getInt(1));
-		jObj.addProperty("name", rs.getString(2));
-		jArr.add(jObj);
-	}
-
-	con.close();
-	System.out.println(jArr.toString());
-  return jArr.toString();
-}
-public static String getöAdGroup(Connection con,String ExchangeId,String noBidId, String advertiserid,String id_compaign) throws SQLException{
-	
-	 ResultSet rs;
-	 JsonArray jArr;
-	 JsonObject jObj;
-	 String query="";
-//System.out.println(ExchangeId);
-jArr = new JsonArray();
-int id = Integer.parseInt(ExchangeId);
-int idAdv=Integer.parseInt(advertiserid);
-int idCompaign=Integer.parseInt(id_compaign);
-query= "select distinct ADGROUP.ADGROUP_ID ,ADGROUP.AD_GROUP_NAME"
-		+ " from ADV_PROJECT,NOBID_MAINTABLE,ADV_CAMPAIGN,ADGROUP"
-		+ " where NOBID_MAINTABLE.ADV_PROJECT_ID=ADV_PROJECT.ADV_PROJECT_ID"
-		+" and NOBID_MAINTABLE.ADV_CAMPAIGN_ID=ADV_CAMPAIGN.ADV_CAMPAIGN_ID"
-		+" and NOBID_MAINTABLE.ADGROUP_ID=ADGROUP.ADGROUP_ID"
-		+" and NOBID_MAINTABLE.PRT_CAMPAIGN_ID="+id+" and NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID="+noBidId
-		+" and ADV_PROJECT.ADV_PROJECT_ID="+idAdv+" and ADV_CAMPAIGN.ADV_CAMPAIGN_ID="+idCompaign;
-PreparedStatement st= con.prepareStatement(query);
-	rs = st.executeQuery(query);
-	while(rs.next()){
-		jObj = new JsonObject();
-		jObj.addProperty("id", rs.getInt(1));
-		jObj.addProperty("name", rs.getString(2));
-		jArr.add(jObj);
-	}
-
-	con.close();
-	System.out.println(jArr.toString());
- return jArr.toString();
-}
 
 
 //Example
@@ -185,6 +125,7 @@ public static String getExample(Connection con,String ExchangeId,String... noBid
 
 		jArr.add(jObj);
 	   }
+
      }
 	    con.close();
 	    System.out.println("Graph Finished");
