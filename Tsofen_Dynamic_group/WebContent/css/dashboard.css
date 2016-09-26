@@ -1,3 +1,11 @@
+body {
+	background-color: #e9ebee;
+}
+
+label {
+	font-size: 16px;
+}
+
 .blackWindow {
 	position: absolute;
 	width: 100%;
@@ -8,19 +16,28 @@
 }
 
 .loader {
-	position: absolute;
- 	border-top: 16px solid blue;
-	border-right: 16px solid green;
- 	border-bottom: 16px solid red;
- 	border-left: 16px solid yellow;
+	position: fixed;
+    border-top: 10px solid blue;
+    border-right: 10px solid green;
+    border-bottom: 10px solid red;
+    border-left: 10px solid yellow;
     border-radius: 50%;
-    width: 120px;
-    height: 120px;
+    width: 50px;
+    height: 50px;
     animation: spin 2s linear infinite;
     z-index: 20;
+    left: 48%;
+    top: 17%;
 }
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+@media(max-width: 1200px){
+	
+	.margin-bottom-6 {
+		margin-bottom: 6px;
+	}
 }
