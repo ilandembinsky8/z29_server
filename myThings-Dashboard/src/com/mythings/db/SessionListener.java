@@ -34,6 +34,8 @@ public class SessionListener implements HttpSessionListener {
     		 HttpSession session = e.getSession();
     		 con = (MyConnection)session.getAttribute("connection");
     		 if (con != null) con.closeCon();
+    		 if(session.getAttribute("user") != null)
+    			 session.removeAttribute("user");
 		} catch (SQLException e1) { e1.printStackTrace(); }
     }
 	
