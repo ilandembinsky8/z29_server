@@ -31,7 +31,9 @@ public class GetData extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		MyConnection con=null;
-		PrintWriter out;
+		PrintWriter out = response.getWriter();
+		String exchangeId, noBidId, advCampId, compaignId;
+		String func = request.getParameter("func");
 		
 	    try {
 	    	HttpSession session = request.getSession();
@@ -41,17 +43,12 @@ public class GetData extends HttpServlet {
 	    		con = new MyConnection();
 	    		session.setAttribute("connection",con);
 	    	}	
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
+		} 
+	    catch (ClassNotFoundException e1) { e1.printStackTrace(); } 
+	    catch (SQLException e1) { e1.printStackTrace(); }
 	    	
 		
 		try {
-			 
-			out = response.getWriter();
-			String func = request.getParameter("func");
 			
 			if(func.equals("getEx")){
 				
@@ -59,31 +56,31 @@ public class GetData extends HttpServlet {
 			}
 			else if(func.equals("getNoBid")){
 				
-				String Exchangeid= request.getParameter("exchID");
-				out.print(QueryResults.getNoBidReason(con.getCon(), Exchangeid));
+				exchangeId = request.getParameter("exchId");
+				out.print(QueryResults.getNoBidReason(con.getCon(), exchangeId));
 			}
 			else if(func.equals("getAdv")){
 				
-				String exchangeid= request.getParameter("exchID");
-				String nobid=request.getParameter("noBidID");
-				out.print(QueryResults.getAdv(con.getCon(),exchangeid,nobid));
+				exchangeId = request.getParameter("exchId");
+				noBidId = request.getParameter("noBidId");
+				out.print(QueryResults.getAdv(con.getCon(),exchangeId,noBidId));
 			}
 			else if(func.equals("getAdvCompaign")){
 				
-				String Exchangeid= request.getParameter("exchID");
-				String nobid=request.getParameter("noBidID");
-				String Advcampid=request.getParameter("Advcampid");
+				exchangeId = request.getParameter("exchId");
+				noBidId = request.getParameter("noBidId");
+				advCampId = request.getParameter("Advcampid");
 
-			//	out.print(QueryResults.getAdvCompaign(con.getCon(), Exchangeid, nobid,Advcampid));
+			//	out.print(QueryResults.getAdvCompaign(con.getCon(), exchangeId, noBidId,advCampId));
 
 			}
 			else if(func.equals("getAdGroup")){
 				
-				String Exchangeid= request.getParameter("exchID");
-				String nobid=request.getParameter("noBidID");
-				String Advcampid=request.getParameter("Advcampid");
-				String idCompaign=request.getParameter("idCompaign");
-				//out.print(QueryResults.getAdGroup(con.getCon(),Exchangeid,nobid,Advcampid,idCompaign));
+				exchangeId = request.getParameter("exchId");
+				noBidId = request.getParameter("noBidId");
+				advCampId = request.getParameter("advCampId");
+			    compaignId = request.getParameter("compaignId");
+				//out.print(QueryResults.getAdGroup(con.getCon(),exchangeId,noBidId,advCampId,idCompaign));
 			}
 
 //			else if(func.equals("getGraph")){
@@ -92,12 +89,9 @@ public class GetData extends HttpServlet {
 //				out.print(NoBidMethods.getExample(con.getCon(), Exchangeid, nobid));
 //			}
 			
-			//con.closeCon();
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		} catch (SQLException e) { e.printStackTrace(); }
+		
+		out.close();
 	}
 }

@@ -17,7 +17,7 @@ $(document).ready(function() {
 $("#exSelect").change(function(){
 	var val = this.value;
 	$("#advSelect").html($("<option></option>").text("select")); 
-	$.get("getkpidata?func=getAdv&exchID=" + val, function(data){
+	$.get("getkpidata?func=getAdv&exchId=" + val, function(data){
 		var jsonData = JSON.parse(data);
 		for(var i = 0; i < jsonData.length; i++) 
 			$('#advSelect').append($("<option></option>").attr("value",jsonData[i].id).text(jsonData[i].name)); 

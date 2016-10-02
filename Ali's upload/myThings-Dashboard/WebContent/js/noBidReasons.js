@@ -18,7 +18,7 @@ $("#exSelect").change(function() {
     $('#noBidReason').html('<select class="form-control" id="noBidReasonSelect" name="multiselect[]" multiple="multiple"></select></div></div>');
 
     var exchSelectedID = $("#exSelect option:selected").val();
-    $.get("getdata?func=getNoBid&exchID=" + exchSelectedID, function(data) {
+    $.get("getdata?func=getNoBid&exchId=" + exchSelectedID, function(data) {
 
         var jsonData = JSON.parse(data);
         
@@ -41,7 +41,7 @@ $("#exSelect").change(function() {
                  });*/
                  noBidSelectedID = $("#noBidReasonSelect option:selected").val();
                 
-                 //$.get("getdata?func=getAdv&exchID=" + exchSelectedID+"&noBidID="+noBidSelectedID, function(data) {
+                 //$.get("getdata?func=getAdv&exchId=" + exchSelectedID+"&noBidId="+noBidSelectedID, function(data) {
                 	 $('#tree-container').empty();
                 	 //showTree(JSON.parse(data));
                 	 showTree(root);

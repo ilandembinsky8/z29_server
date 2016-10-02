@@ -28,17 +28,13 @@ public class GetKpiData extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response){
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
 		MyConnection con = null;
-		PrintWriter out = null;
+		PrintWriter out = response.getWriter();
 		String func = request.getParameter("func");
 		HttpSession session = request.getSession();
 		con = (MyConnection)session.getAttribute("connection");
-		
-		
-		try { out = response.getWriter(); }
-		catch (IOException e) { e.printStackTrace(); }
 		
 		if (con == null) {
     		
@@ -53,11 +49,14 @@ public class GetKpiData extends HttpServlet {
 		try {
 			if(func.equals("getEx")) 
 				out.print(KpiQuery.getExchange(con.getCon()));
+			
 			else if(func.equals("getAdv")){
 				
-				String exchangeid = request.getParameter("exchID");
-				out.print(KpiQuery.getAdv(con.getCon(),exchangeid));
+				String exchangeId = request.getParameter("exchId");
+				out.print(KpiQuery.getAdv(con.getCon(),exchangeId));
 			}
 		}catch(SQLException e){ e.printStackTrace(); }
+		
+		out.close();
 	}
 }

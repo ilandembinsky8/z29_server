@@ -3,6 +3,8 @@ package com.mythings.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,17 +29,16 @@ public class Login extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response){
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
 		MyConnection con = null;
-		PrintWriter out = null;
+		PrintWriter out = response.getWriter();
 		HttpSession session = null;
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
 		JsonObject jO = new JsonObject();
 		
 		try {
-			out = response.getWriter();
 			session = request.getSession();
 	    	con = (MyConnection)session.getAttribute("connection");
 	    	
@@ -72,7 +73,6 @@ public class Login extends HttpServlet {
 		}
 		catch (SQLException e) { e.printStackTrace(); }
 		catch (ClassNotFoundException e) { e.printStackTrace(); }
-		catch (IOException e) { e.printStackTrace(); } 
 		
 		out.print(jO);
 		out.close();
