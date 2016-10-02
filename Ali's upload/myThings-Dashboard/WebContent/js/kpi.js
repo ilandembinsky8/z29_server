@@ -14,15 +14,6 @@ $(document).ready(function() {
 });
 
 
-$("#btn_logOut").click(function(){
-	$.post("logout",function(data){
-		var jsonData = JSON.parse(data);
-		window.location = jsonData.redirectPath;
-	});
-});
-
-
-
 $("#exSelect").change(function(){
 	var val = this.value;
 	$("#advSelect").html($("<option></option>").text("select")); 
@@ -32,8 +23,6 @@ $("#exSelect").change(function(){
 			$('#advSelect').append($("<option></option>").attr("value",jsonData[i].id).text(jsonData[i].name)); 
 	});
 });
-
-
 
 
 

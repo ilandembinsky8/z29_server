@@ -11,3 +11,7 @@ $.ajaxSetup({
     beforeSend: showLoader,
     complete: hideLoader
 });
+
+$("#btn_logOut").click(function(){
+	$.get("logout");
+});

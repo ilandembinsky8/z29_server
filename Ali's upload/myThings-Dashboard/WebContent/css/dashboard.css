@@ -28,6 +28,7 @@ label {
     z-index: 20;
     left: 48%;
     top: 17%;
+    display: none;
 }
 
 @keyframes spin {

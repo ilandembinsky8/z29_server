@@ -2,7 +2,7 @@
 $("#btn_login").click(function(){
 	var id1 = $("#adminId").val();
 	var pass1 = $("#adminPass").val();
-	// Checking for blank fields.
+	
 	if( id1 ==''){
 		$('.message').css("display","block");
 		$('.message').html("Please enter ID");

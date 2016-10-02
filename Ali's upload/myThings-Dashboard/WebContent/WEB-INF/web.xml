@@ -5,6 +5,22 @@
     <listener-class>com.mythings.db.SessionListener</listener-class>
   </listener>
   <welcome-file-list>
-    <welcome-file>kpi.html</welcome-file>
+    <welcome-file>login.html</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <servlet-name>kpi</servlet-name>
+    <jsp-file>/kpi.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>kpi</servlet-name>
+    <url-pattern>/kpi</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>noBidReason</servlet-name>
+    <jsp-file>/noBidReason.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>noBidReason</servlet-name>
+    <url-pattern>/noBidReason</url-pattern>
+  </servlet-mapping>
 </web-app>

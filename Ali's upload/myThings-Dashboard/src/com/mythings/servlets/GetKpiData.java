@@ -28,46 +28,36 @@ public class GetKpiData extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response){
 		
-		MyConnection con=null;
-		PrintWriter out;
+		MyConnection con = null;
+		PrintWriter out = null;
+		String func = request.getParameter("func");
+		HttpSession session = request.getSession();
+		con = (MyConnection)session.getAttribute("connection");
 		
-	    try {
-	    	HttpSession session = request.getSession();
-	    	con = (MyConnection)session.getAttribute("connection");
-	    	if (con == null) {
-	    		
-	    		con = new MyConnection();
-	    		session.setAttribute("connection",con);
-	    	}	
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-	    	
+		
+		try { out = response.getWriter(); }
+		catch (IOException e) { e.printStackTrace(); }
+		
+		if (con == null) {
+    		
+    		try { con = new MyConnection(); }
+    		catch (ClassNotFoundException e) { e.printStackTrace();} 
+    		catch (SQLException e) { e.printStackTrace(); }
+    		
+    		session.setAttribute("connection",con);
+    	}	
+	   
 		
 		try {
-			 
-			out = response.getWriter();
-			String func = request.getParameter("func");
-			
-			if(func.equals("getEx")){
-				
+			if(func.equals("getEx")) 
 				out.print(KpiQuery.getExchange(con.getCon()));
-			}
 			else if(func.equals("getAdv")){
 				
 				String exchangeid = request.getParameter("exchID");
 				out.print(KpiQuery.getAdv(con.getCon(),exchangeid));
 			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		}catch(SQLException e){ e.printStackTrace(); }
 	}
-
 }

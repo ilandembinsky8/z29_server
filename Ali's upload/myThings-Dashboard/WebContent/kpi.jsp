@@ -1,18 +1,25 @@
-<!DOCTYPE html>
-<html>
+<?xml version="1.0" encoding="UTF-8" ?>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%
+	if(session.getAttribute("user") == null)
+		response.sendRedirect("login.html");
+%>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Admin Dashboard</title>
+
+	<title>Dashboard-KPI</title>
 	
-	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/sb-admin.css" rel="stylesheet">
-    <link href="css/dashboard.css" rel="stylesheet">
-    <link href="css/kpi.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<link href="css/bar-chart.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/sb-admin.css" rel="stylesheet"/>
+    <link href="css/dashboard.css" rel="stylesheet"/>
+    <link href="css/kpi.css" rel="stylesheet"/>
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+	<link href="css/bar-chart.css" rel="stylesheet"/>
 
 </head>
 <body>
@@ -30,7 +37,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="kpi.html">Admin <i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                <a class="navbar-brand" href="kpi">Admin <i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -80,10 +87,10 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse nav navbar-left top-nav">
 		    	<ul class="nav navbar-nav">
 		        	<li class="active">
-		            	<a href="kpi.html"><i class="fa fa-bar-chart"></i> KPI's</a>
+		            	<a href="kpi"><i class="fa fa-bar-chart"></i> KPI's</a>
 		            </li>
 		            <li>
-		            	<a href="noBidReason.html"><i class="fa fa-dot-circle-o"></i> No Bid Reason</a>
+		            	<a href="noBidReason"><i class="fa fa-dot-circle-o"></i> No Bid Reason</a>
 		            </li>
 		        </ul>
 			</div>
