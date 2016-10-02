@@ -1,7 +1,6 @@
 $(document).ready(function() {
 
-	// Load select input values
-	$.get("getdata?func=getEx", function(data){
+	$.get("getkpidata?func=getEx", function(data){
 		var jsonData = JSON.parse(data);
         for(var i = 0; i < jsonData.length; i++) 
         	$('#exSelect').append($("<option></option>").attr("value",jsonData[i].id).text(jsonData[i].name)); 
@@ -25,8 +24,9 @@ $("#btn_logOut").click(function(){
 
 
 $("#exSelect").change(function(){
-	$("#advSelect").empty().append($("<option></option>").text("select")); 
-	$.get("getdata?func=getAdvForEx&exID=" + this.value, function(data){
+	var val = this.value;
+	$("#advSelect").html($("<option></option>").text("select")); 
+	$.get("getkpidata?func=getAdv&exchID=" + val, function(data){
 		var jsonData = JSON.parse(data);
 		for(var i = 0; i < jsonData.length; i++) 
 			$('#advSelect').append($("<option></option>").attr("value",jsonData[i].id).text(jsonData[i].name)); 

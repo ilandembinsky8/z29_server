@@ -7,7 +7,6 @@ import java.sql.SQLException;
 
 public class MyConnection {
 	
-	//private DbHandler handler;
 	private Connection con;
 	private final String url = "jdbc:mysql://tsofen29db.csks0itfccec.eu-central-1.rds.amazonaws.com:3306/Updated";
 	private final String username = "Tsofen29DBUser";
@@ -20,15 +19,10 @@ public class MyConnection {
 	}
 	
 
-	public Connection getCon(){
-		return con;
-		
-	}
+	public Connection getCon(){ return con; }
 	
-	public void closeCon() throws SQLException
-	{
-		con.close();
-	}
+	
+	public void closeCon() throws SQLException { con.close(); }
 
 
 }

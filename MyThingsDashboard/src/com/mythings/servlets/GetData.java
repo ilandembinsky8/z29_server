@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.mythings.db.MyConnection;
-import com.mythings.db.NoBidMethods;
+import com.mythings.db.QueryResults;
 
 /**
  * Servlet implementation class HandlerServlet
@@ -31,63 +31,59 @@ public class GetData extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		MyConnection con=null;
-		
-	    	try {
-	    		 HttpSession session = request.getSession(  );
-	    		   con = 
-	    		     (MyConnection)session.getAttribute("connection");
-	    		    if (con == null) {
-	    		    	con = new MyConnection();
-	    		    	session.setAttribute("connection",con);
-	    		    }
-				
-			} catch (ClassNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-	    	
-	   
-	
-
 		PrintWriter out;
+		
+	    try {
+	    	HttpSession session = request.getSession();
+	    	con = (MyConnection)session.getAttribute("connection");
+	    	if (con == null) {
+	    		
+	    		con = new MyConnection();
+	    		session.setAttribute("connection",con);
+	    	}	
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	    	
 		
 		try {
 			 
 			out = response.getWriter();
 			String func = request.getParameter("func");
 			
-			if(func.equals("getEx"))
-				out.print(NoBidMethods.getExchange(con.getCon()));
-			
-			if(func.equals("getNoBid")){
-				String Exchangeid= request.getParameter("exchID");
-			
-				out.print(NoBidMethods.getNoBidReason(con.getCon(), Exchangeid));
+			if(func.equals("getEx")){
+				
+				out.print(QueryResults.getExchange(con.getCon()));
 			}
-			else if(func.equals("getAd")){
+			else if(func.equals("getNoBid")){
+				
+				String Exchangeid= request.getParameter("exchID");
+				out.print(QueryResults.getNoBidReason(con.getCon(), Exchangeid));
+			}
+			else if(func.equals("getAdv")){
+				
 				String exchangeid= request.getParameter("exchID");
 				String nobid=request.getParameter("noBidID");
-				out.print(NoBidMethods.getAdv(con.getCon(), exchangeid, nobid));
+				out.print(QueryResults.getAdv(con.getCon(),exchangeid,nobid));
 			}
-			else if(func.equals("getAdvCampaign")){
+			else if(func.equals("getAdvCompaign")){
+				
 				String Exchangeid= request.getParameter("exchID");
 				String nobid=request.getParameter("noBidID");
 				String Advcampid=request.getParameter("Advcampid");
 
-				out.print(NoBidMethods.getAdvCampaign(con.getCon(), Exchangeid, nobid,Advcampid));
+			//	out.print(QueryResults.getAdvCompaign(con.getCon(), Exchangeid, nobid,Advcampid));
 
 			}
 			else if(func.equals("getAdGroup")){
+				
 				String Exchangeid= request.getParameter("exchID");
 				String nobid=request.getParameter("noBidID");
 				String Advcampid=request.getParameter("Advcampid");
 				String idCompaign=request.getParameter("idCompaign");
-
-				out.print(NoBidMethods.getAdGroup(con.getCon(),Exchangeid,nobid,Advcampid,idCompaign));
-
+				//out.print(QueryResults.getAdGroup(con.getCon(),Exchangeid,nobid,Advcampid,idCompaign));
 			}
 
 //			else if(func.equals("getGraph")){
