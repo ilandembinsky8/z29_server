@@ -1,0 +1,33 @@
+@CHARSET "UTF-8";
+
+
+.row {
+	margin-bottom: 10px;
+}
+
+.col-sm-2 {
+	text-align: right;
+}
+
+
+.kpi-date input {
+	width: 30%;
+}
+
+.kpi-date input {
+	display: inline-block;
+}
+
+select {
+	max-height: 100px;
+	overflow-y: auto;
+}
+
+
+@media(max-width: 768px){
+	
+	.col-sm-2 {
+		text-align: left;
+	}
+}
+
