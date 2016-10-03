@@ -13,5 +13,5 @@ $.ajaxSetup({
 });
 
 $("#btn_logOut").click(function(){
-	$.get("logout");
+	$.post("logout");
 });

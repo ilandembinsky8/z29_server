@@ -17,11 +17,11 @@ $("#exSelect").change(function() {
     $('#noBidReasonLabel').html('<label class="control-label">No Bid Reason</label>');
     $('#noBidReason').html('<select class="form-control" id="noBidReasonSelect" name="multiselect[]" multiple="multiple"></select></div></div>');
 
-    var exchSelectedID = $("#exSelect option:selected").val();
-    $.get("getdata?func=getNoBid&exchId=" + exchSelectedID, function(data) {
-
-        var jsonData = JSON.parse(data);
+    var exchSelectedId = $("#exSelect option:selected").val();
+    $.get("getdata?func=getNoBid&exchId=" + exchSelectedId, function(data) {
         
+    	var jsonData = JSON.parse(data);
+    	
         for (var i = 0; i < jsonData.length; i++) 
             $('#noBidReasonSelect').append($("<option></option>").attr("value", jsonData[i].id).text(jsonData[i].name));
         
@@ -39,9 +39,9 @@ $("#exSelect").change(function() {
                  $('#noBidReasonSelect :selected').each(function(i, selected) {
                      selectedNoBidsValues[i] = $(selected).val();
                  });*/
-                 noBidSelectedID = $("#noBidReasonSelect option:selected").val();
+                 noBidSelectedId = $("#noBidReasonSelect option:selected").val();
                 
-                 //$.get("getdata?func=getAdv&exchId=" + exchSelectedID+"&noBidId="+noBidSelectedID, function(data) {
+                 //$.get("getdata?func=getAdv&exchId=" + exchSelectedId+"&noBidId="+noBidSelectedId, function(data) {
                 	 $('#tree-container').empty();
                 	 //showTree(JSON.parse(data));
                 	 showTree(root);

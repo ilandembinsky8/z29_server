@@ -37,14 +37,14 @@ public class KpiQuery {
 	}	
 	
 	
-	public static String getAdv(Connection con,String exchID) throws SQLException{
+	public static String getAdv(Connection con,String exchId) throws SQLException{
 		
 		jArr = new JsonArray();
-		int id = Integer.parseInt(exchID);
+		int id = Integer.parseInt(exchId);
 	
 		query = "SELECT distinct ADV_PROJECT.ADV_PROJECT_ID , ADV_PROJECT.ADV_PROJECT_NAME"
 			  + " from ADV_PROJECT , KPI_MAINTABLE"
-			  + " where ADV_PROJECT.ADV_PROJECT_ID=KPI_MAINTABLE.ADV_PROJECT_ID and KPI_MAINTABLE.PRT_CAMPAIGN_ID=" + 10159;
+			  + " where ADV_PROJECT.ADV_PROJECT_ID=KPI_MAINTABLE.ADV_PROJECT_ID and KPI_MAINTABLE.PRT_CAMPAIGN_ID=" + id;
 	
 		pst= con.prepareStatement(query);
 	  

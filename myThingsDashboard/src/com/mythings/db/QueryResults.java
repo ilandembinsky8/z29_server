@@ -38,18 +38,19 @@ public class QueryResults {
 	}	
 	
 	
-	public static String getNoBidReason(Connection con,String exchangeid ) throws SQLException{
+	public static String getNoBidReasons(Connection con,String exchangeId ) throws SQLException{
 			
 	    jArr = new JsonArray();
-	    int id = Integer.parseInt(exchangeid);
-	    query="select distinct REASON_TYPE.NO_BID_REASON_TYPE_ID ,"
-	       		+ " REASON_TYPE.NO_BID_REASON_TYPE from REASON_TYPE inner join NOBID_MAINTABLE"
-	       		+ " on NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID=REASON_TYPE.NO_BID_REASON_TYPE_ID "
-	       		+ "where NOBID_MAINTABLE.PRT_CAMPAIGN_ID=" +id;
-	       
-	    pst= con.prepareStatement(query);
-	 
-		rs = pst.executeQuery(query);
+	    int id = Integer.parseInt(exchangeId);
+	    
+	    query = "SELECT distinct REASON_TYPE.NO_BID_REASON_TYPE_ID,REASON_TYPE.NO_BID_REASON_TYPE"
+	       	  + " FROM REASON_TYPE inner join NOBID_MAINTABLE"
+	       	  + " ON NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID=REASON_TYPE.NO_BID_REASON_TYPE_ID"
+	       	  + " WHERE NOBID_MAINTABLE.PRT_CAMPAIGN_ID=" +id;
+	    
+	    st =  con.createStatement();
+		rs = st.executeQuery(query);
+		
 		while(rs.next()){
 			jObj = new JsonObject();
 			jObj.addProperty("id", rs.getInt(1));
