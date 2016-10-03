@@ -34,13 +34,13 @@ $("#exSelect").change(function() {
             onSelectAll: function() {
             },
             onChange: function() {
-                /* var selectedNoBidsValues = [];
+                 var selectedNoBidsValues = [];
                  $('#noBidReasonSelect :selected').each(function(i, selected) {
                      selectedNoBidsValues[i] = $(selected).val();
-                 });*/
-                 noBidSelectedId = $("#noBidReasonSelect option:selected").val();
-                
-                 //$.get("getdata?func=getAdv&exchId=" + exchSelectedId+"&noBidId="+noBidSelectedId, function(data) {
+                 });
+                // noBidSelectedId = $("#noBidReasonSelect option:selected").val();
+             
+                 //$.get("getdata?func=getAdv&exchId=" + exchSelectedId+"&noBidId="+selectedNoBidsValues, function(data) {
                 	 $('#tree-container').empty();
                 	 //showTree(JSON.parse(data));
                 	 $('form').toggle("slow");
