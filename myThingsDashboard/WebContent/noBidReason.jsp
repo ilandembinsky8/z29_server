@@ -146,8 +146,13 @@
 						  		</select>
 					        </div>    
 				          	<div class="input-group col-xs-12 col-sm-4" id="noBid"></div>
+				          	
 			        	</div>
+			      	        <div class="input-group col-xs-12 col-sm-4" id="btn_send"></div>
+			        	
 			        </div> 
+			         
+		            </div>
 			           
 			    </form>
 		    </div>
