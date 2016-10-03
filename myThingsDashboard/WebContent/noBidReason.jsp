@@ -40,7 +40,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="kpi">Admin <i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                <a class="navbar-brand" href="kpi.html">Admin <i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -90,61 +90,62 @@
 		    <div class="collapse navbar-collapse navbar-ex1-collapse nav navbar-left top-nav">
 		    	<ul class="nav navbar-nav">
 		        	<li>
-		            	<a href="kpi"><i class="fa fa-bar-chart"></i> KPI's</a>
+		            	<a href="kpi.html"><i class="fa fa-bar-chart"></i> KPI's</a>
 		            </li>
 		            <li class="active">
-		            	<a href="noBidReason"><i class="fa fa-dot-circle-o"></i> No Bid Reason</a>
+		            	<a href="noBidReason.html"><i class="fa fa-dot-circle-o"></i> No Bid Reason</a>
 		            </li>
 		        </ul>
 			</div>
         </nav>
        
-		<div class="row">
-	    	<div class="col-xs-12">
-				<h3>Fill to show a tree</h3> 
-			</div>
+		<div class="row">    	
 			<div class="col-xs-12">
-			
-				<form class="form-horizontal" role="form">	
+				<form class="form-horizontal" role="form">
+					
 			    	<div class="form-group">
-			        	<label for="telnum" class="col-sm-2 control-label">Date</label>
-			            <div class="col-xs-12 col-sm-10 col-lg-5 margin-bottom-6">
-			            	<div class="input-group">
-			            		<div class="input-group-addon">Reference</div>
-			                    <input class="form-control" type="datetime-local" id="fromDate">
+			        	<h4 class="col-xs-12">Date &amp; Time</h4>
+			            <div class="col-xs-12 col-sm-2 margin-bottom-6">
+			            	<label class="control-label">Reference</label>
+			            </div>
+			            <div class="col-xs-12 col-sm-10">
+			            	<div class="input-group col-sm-3">
+			            		<div class="input-group-addon">Date</div>
+			                    <input class="form-control" type="date" id="">
+			                </div>
+			                <div class="input-group col-sm-3">
+			            		<div class="input-group-addon">Time</div>
+			                    <input class="form-control" type="time" id="">
 			                </div>
 			            </div>
-			            <div class="col-xs-12 col-sm-10 col-sm-offset-2 col-lg-5 col-lg-offset-0">
-			            	<div class="input-group">
-			                	<div class="input-group-addon">Compare To</div>
-			                    <input class="form-control" type="datetime-local" id=toDate>
+			           	<div class="col-xs-12 col-sm-2 margin-bottom-6">
+			            	<label class="control-label">Compare To</label>
+			            </div>
+			            <div class="col-xs-12 col-sm-10">
+			            	<div class="input-group col-sm-3">
+			            		<div class="input-group-addon">Date</div>
+			                    <input class="form-control" type="date" id="">
+			                </div>
+			                <div class="input-group col-sm-3">
+			            		<div class="input-group-addon">Time</div>
+			                    <input class="form-control" type="time" id="">
 			                </div>
 			            </div>
 			        </div>
-			            
 			        <div class="form-group">
-			        	<label for="firstname" class="col-sm-2 control-label">Exchange Name</label>         
-			            <div class="col-sm-10">
-			            	<select class="form-control" id="exSelect">
-			                	<option>select</option>
-				  			</select>
-			            </div>               
-			        </div>
-                                           
-                       <div class="form-group">
-			        	<div class="col-sm-2" id="noBidReasonLabel"></div>
-			            	<div class="col-sm-10">
-			            		<div id="noBidReason"></div>
-			            	</div>
-                       </div>
-                           
-                       <div class="form-group">
-			        	<div class="col-sm-2" id="noBidReasonLabel"></div>
-			            <div class="col-sm-10">
-			            	<div id="noBidReason"></div>
-			            </div>
-                       </div>
-			        
+			        	<h4 class="col-xs-12">Filter</h4> 
+			        	<div class="col-xs-12">      
+					        <div class="input-group col-sm-4">
+					        	<div class="input-group-addon">Exchange</div>
+					          	<select class="form-control" id="exSelect">
+					               	<option>select</option>
+					               	<option>select2</option>
+						  		</select>
+					        </div>    
+				          	<div class="input-group col-xs-12 col-sm-4" id="noBid"></div>
+			        	</div>
+			        </div> 
+			           
 			    </form>
 		    </div>
 		</div>

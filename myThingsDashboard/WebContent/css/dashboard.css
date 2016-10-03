@@ -36,6 +36,7 @@ label {
     100% { transform: rotate(360deg); }
 }
 
+
 @media(max-width: 1200px){
 	
 	.margin-bottom-6 {

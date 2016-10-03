@@ -1,42 +1,63 @@
 .node {
     cursor: pointer;
-  }
+}
 
-  .overlay{
-      background-color:#EEE;
-  }
+.overlay{
+    background-color:#EEE;
+}
    
-  .node circle {
+.node circle {
     fill: #fff;
     stroke: steelblue;
     stroke-width: 1.5px;
-  }
+}
    
-  .node text {
+.node text {
     font-size:10px; 
     font-family:sans-serif;
-  }
+}
    
-  .link {
+.link {
     fill: none;
     stroke: #ccc;
     stroke-width: 1.5px;
-  }
+}
 
-  .templink {
+.templink {
     fill: none;
     stroke: red;
     stroke-width: 3px;
-  }
+}
 
-  .ghostCircle.show{
-      display:block;
-  }
+.ghostCircle.show{
+    display:block;
+}
 
-  .ghostCircle, .activeDrag .ghostCircle{
-       display: none;
-  }
+.ghostCircle, .activeDrag .ghostCircle{
+    display: none;
+}
   
-  svg {
+svg {
   	width:100%;
-  }
+}
+  
+.input-group {
+  	margin-bottom: 3px;
+  	margin-right: 3px;
+  	float: left !important;
+}
+  
+label {
+	width: 100%;
+}
+
+.form-group:first-child {
+	margin-bottom: 0;
+}
+
+
+  
+  
+  
+  
+  

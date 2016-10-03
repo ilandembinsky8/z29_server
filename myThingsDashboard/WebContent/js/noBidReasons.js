@@ -14,8 +14,8 @@ $(document).ready(function() {
 
 $("#exSelect").change(function() {
    
-    $('#noBidReasonLabel').html('<label class="control-label">No Bid Reason</label>');
-    $('#noBidReason').html('<select class="form-control" id="noBidReasonSelect" name="multiselect[]" multiple="multiple"></select></div></div>');
+    $('#noBid').html('<div class="input-group-addon">NoBidReasons</div>');
+    $('#noBid').append('<select class="form-control" id="noBidReasonSelect" name="multiselect[]" multiple="multiple"></select>');
 
     var exchSelectedId = $("#exSelect option:selected").val();
     $.get("getdata?func=getNoBid&exchId=" + exchSelectedId, function(data) {
