@@ -109,13 +109,13 @@
 		                <div class="col-xs-12 col-sm-10 col-lg-5 margin-bottom-6">
 		                	<div class="input-group">
 		                    	<div class="input-group-addon">From</div>
-		                        <input class="form-control" type="date" id="fromDate">
+		                        <input class="form-control date" type="text" id="fromDate"/>
 		                    </div>
 		                </div>
 		                <div class="col-xs-12 col-sm-10 col-sm-offset-2 col-lg-5 col-lg-offset-0">
 		                	<div class="input-group">
 		                    	<div class="input-group-addon">To</div>
-		                        <input class="form-control" type="date" id=toDate>
+		                        <input class="form-control date" type="text" id="toDate"/>
 		                    </div>
 		                </div>
 		            </div>
@@ -167,17 +167,25 @@
 		            
 		            <div class="form-group">                        
 		            	<div class="col-sm-offset-2 col-sm-10">
-		                	<button type="submit" class="btn btn-primary">Send</button>
+		                	<button type="button" class="btn btn-primary">Send</button>
 		                </div>
 		            </div>
+		            
 		        </form>
 		    </div>
+		    <div class="col-sm-2 col-sm-push-10">
+		    	<button type="button" class="btn btn-primary" id="btnHideSelects">Down</button>
+		    </div>
 		</div>
+		<div id="bar-chart"></div>
     </div>
 
     <script src="js/jquery.min.js"></script>
+    <script src="js/mask.min.js"></script>
     <script src="js/dashboard.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/d3.v3.min.js"></script>
+	<script src="js/bar-chart.js"></script>
     <script src="js/kpi.js"></script>
     
 </body>

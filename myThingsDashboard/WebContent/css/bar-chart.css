@@ -16,3 +16,12 @@
   	stroke: #000;
   	shape-rendering: crispEdges;
 }
+
+#bar-chart {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+svg {
+	padding: 10px;
+}

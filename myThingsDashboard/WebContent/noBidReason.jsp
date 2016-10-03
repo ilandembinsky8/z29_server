@@ -100,7 +100,10 @@
 			</div>
         </nav>
        
-		<div class="row">    	
+		<div class="row">
+			<div class="col-xs-12">
+		    	<h3>Fill to show a Tree</h3> 
+		    </div>    	
 			<div class="col-xs-12">
 				<form class="form-horizontal">
 					
@@ -148,9 +151,12 @@
 			           
 			    </form>
 		    </div>
+		    <div class="col-sm-2 col-sm-push-10">
+				<button type="button" class="btn btn-primary" id="btnHideSelects">Down</button>
+			</div>
 		</div>
-        <div id="tree-container"></div>   
     </div>
+    <div id="tree-container"></div>   
 
   	<script src="js/jquery.min.js"></script>
   	<script src="js/mask.min.js"></script>

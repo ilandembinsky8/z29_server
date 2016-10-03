@@ -9,15 +9,12 @@ $(document).ready(function() {
         for(var i = 0; i < jsonData.length; i++) 
         	$('#exSelect').append($("<option></option>").attr("value",jsonData[i].id).text(jsonData[i].name)); 
     });
-	
-	$('.date').mask('00/00/0000', {placeholder: "MM/DD/YYYY"});
-	$('.time').mask('00:00', {placeholder: "00:00"});
 });
 
 $("#exSelect").change(function() {
 	
     $('#noBid').html('<div class="input-group-addon">NoBidReasons</div>');
-    $('#noBid').append('<select class="form-control" id="noBidReasonSelect" name="multiselect[]" multiple="multiple"></select>');
+    $('#noBid').append('<select class="form-control" id="noBidReasonSelect" name="multiselect[]" multiple="multiple"><option>a</option><option>b</option></select>');
 
     var exchSelectedId = $("#exSelect option:selected").val();
     //$.get("getdata?func=getNoBid&exchId=" + exchSelectedId, function(data) {
@@ -46,6 +43,8 @@ $("#exSelect").change(function() {
                  //$.get("getdata?func=getAdv&exchId=" + exchSelectedId+"&noBidId="+noBidSelectedId, function(data) {
                 	 $('#tree-container').empty();
                 	 //showTree(JSON.parse(data));
+                	 $('form').toggle("slow");
+                	 $('#btnHideSelects').show();
                 	 showTree(root);
                  //});
              }

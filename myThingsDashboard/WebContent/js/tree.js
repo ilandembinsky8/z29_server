@@ -19,7 +19,7 @@ treeJSON = d3.json('', function(error, treeData1) {
     var root;
 
     // size of the diagram
-    var viewerWidth = $('#tree-container').width();
+    var viewerWidth = $(document).width();
     var viewerHeight = $(document).height();
 
     var tree = d3.layout.tree()
@@ -311,7 +311,7 @@ treeJSON = d3.json('', function(error, treeData1) {
         y = y * scale + viewerHeight / 2;
         d3.select('g').transition()
             .duration(duration)
-            .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
+            .attr("transform", "translate(" + 200 + "," + y + ")scale(" + scale + ")");
         zoomListener.scale(scale);
         zoomListener.translate([x, y]);
     }

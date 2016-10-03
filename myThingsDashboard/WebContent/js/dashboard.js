@@ -1,3 +1,10 @@
+var formVisiblity = false;
+
+$(document).ready(function() {
+	$('.date').mask('00/00/0000', {placeholder: "MM/DD/YYYY"});
+	$('.time').mask('00:00', {placeholder: "00:00"});
+});
+
 function showLoader(){ 
 	$('.blackWindow').fadeIn();
 	$(".loader").css("display","block"); 
@@ -14,4 +21,16 @@ $.ajaxSetup({
 
 $("#btn_logOut").click(function(){
 	$.post("logout");
+});
+
+$('#btnHideSelects').click(function(){
+	$('form').toggle("slow");
+	if(formVisiblity) {
+		$('#btnHideSelects').text('Down');
+		formVisiblity = false;
+	}
+	else{
+		$('#btnHideSelects').text('Up');
+		formVisiblity = true;
+	}
 });
