@@ -8,12 +8,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
-	<title>Dashboard-KPI</title>
+	<title>KPI</title>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     
+    <link href="img/favicon.ico" rel="icon" type="image/x-icon" />
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/sb-admin.css" rel="stylesheet"/>
     <link href="css/dashboard.css" rel="stylesheet"/>

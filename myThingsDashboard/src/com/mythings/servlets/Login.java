@@ -50,29 +50,37 @@ public class Login extends HttpServlet {
 			
 			if(!LoginQuery.checkID(con.getCon(), id)){
 				
-				jO.addProperty("message", "This ID is Not Exists !");
 				jO.addProperty("success", false);
+				jO.addProperty("message", "This ID is Not Exists !");
 			}
 			else if(!LoginQuery.checkPass(con.getCon(), id, pass)){
 				
-				jO.addProperty("message", "The Password is incorect !");
 				jO.addProperty("success", false);
+				jO.addProperty("message", "The Password is incorect !");
 			}
 			else{
 				
 				request.getSession().setAttribute("isLoggedIn", true);
-				jO.addProperty("redirectPath", "kpi");
 				jO.addProperty("success", true);
+				jO.addProperty("redirectPath", "kpi");
 				session.setAttribute("user", id);
 			}
 			
 		} catch (NumberFormatException e){
 			
-			jO.addProperty("message", "ID should be numeric");
 			jO.addProperty("success", false);
+			jO.addProperty("message", "ID should be numeric");
 		}
-		catch (SQLException e) { e.printStackTrace(); }
-		catch (ClassNotFoundException e) { e.printStackTrace(); }
+		catch (SQLException e) { 
+			
+			jO.addProperty("success", false);
+			jO.addProperty("message", e.getMessage()); 
+		}
+		catch (ClassNotFoundException e) { 
+			
+			jO.addProperty("success", false);
+			jO.addProperty("message", e.getMessage());
+		}
 		
 		out.print(jO);
 		out.close();

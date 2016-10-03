@@ -8,7 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
-	<title>No bid Reason</title>
+	<title>NoBidReason</title>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -16,6 +16,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
+	<link href="img/favicon.ico" rel="icon" type="image/x-icon" />
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/sb-admin.css" rel="stylesheet"/>
     <link href="css/dashboard.css" rel="stylesheet"/>
@@ -90,10 +91,10 @@
 		    <div class="collapse navbar-collapse navbar-ex1-collapse nav navbar-left top-nav">
 		    	<ul class="nav navbar-nav">
 		        	<li>
-		            	<a href="kpi.html"><i class="fa fa-bar-chart"></i> KPI's</a>
+		            	<a href="kpi"><i class="fa fa-bar-chart"></i> KPI's</a>
 		            </li>
 		            <li class="active">
-		            	<a href="noBidReason.html"><i class="fa fa-dot-circle-o"></i> No Bid Reason</a>
+		            	<a href="noBidReason"><i class="fa fa-dot-circle-o"></i> No Bid Reason</a>
 		            </li>
 		        </ul>
 			</div>
@@ -139,7 +140,6 @@
 					        	<div class="input-group-addon">Exchange</div>
 					          	<select class="form-control" id="exSelect">
 					               	<option>select</option>
-					               	<option>select2</option>
 						  		</select>
 					        </div>    
 				          	<div class="input-group col-xs-12 col-sm-4" id="noBid"></div>
