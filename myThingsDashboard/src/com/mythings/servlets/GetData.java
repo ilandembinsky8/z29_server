@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.mythings.db.MyConnection;
-import com.mythings.db.QueryResults;
+import com.mythings.db.NoBidQuery;
 
 /**
  * Servlet implementation class HandlerServlet
@@ -32,7 +32,7 @@ public class GetData extends HttpServlet {
 		
 		MyConnection con=null;
 		PrintWriter out = response.getWriter();
-		String exchangeId, noBidId, advCampId, compaignId;
+		String exchangeId, noBidId, advCampId, campaignId;
 		String func = request.getParameter("func");
 		
 	    try {
@@ -52,19 +52,19 @@ public class GetData extends HttpServlet {
 			
 			if(func.equals("getEx")){
 				
-				out.print(QueryResults.getExchange(con.getCon()));
+				out.print(NoBidQuery.getExchange(con.getCon()));
 			}
 			else if(func.equals("getNoBid")){
 				
 				exchangeId = request.getParameter("exchId");
-				out.print(QueryResults.getNoBidReasons(con.getCon(), exchangeId));
+				out.print(NoBidQuery.getNoBidReasons(con.getCon(), exchangeId));
 				System.out.println("getNoBidReasons Finished");
 			}
 			else if(func.equals("getAdv")){
 				
 				exchangeId = request.getParameter("exchId");
 				noBidId = request.getParameter("noBidId");
-				out.print(QueryResults.getAdv(con.getCon(),exchangeId,noBidId));
+				out.print(NoBidQuery.getAdv(con.getCon(),exchangeId,noBidId));
 			}
 			else if(func.equals("getAdvCompaign")){
 				
@@ -80,7 +80,7 @@ public class GetData extends HttpServlet {
 				exchangeId = request.getParameter("exchId");
 				noBidId = request.getParameter("noBidId");
 				advCampId = request.getParameter("advCampId");
-			    compaignId = request.getParameter("compaignId");
+			    campaignId = request.getParameter("compaignId");
 				//out.print(QueryResults.getAdGroup(con.getCon(),exchangeId,noBidId,advCampId,idCompaign));
 			}
 
