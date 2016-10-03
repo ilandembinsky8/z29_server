@@ -5,22 +5,22 @@ $(document).ready(function() {
 	$.get("getkpidata?func=getEx", function(data){
 		var jsonData = JSON.parse(data);
         for(var i = 0; i < jsonData.length; i++) 
-        	$('#exSelect').append($("<option></option>").attr("value",jsonData[i].id).text(jsonData[i].name)); 
+        	$('#exch').append($("<option></option>").attr("value",jsonData[i].id).text(jsonData[i].name)); 
     });
 });
 
 
-$("#exSelect").change(function(){
+$("#exch").change(function(){
 	var val = this.value;
-	$("#advSelect").html($("<option></option>").text("select")); 
+	$("#adv").html($("<option></option>").text("select")); 
 	$.get("getkpidata?func=getAdv&exchId=" + val, function(data){
 		var jsonData = JSON.parse(data);
 		for(var i = 0; i < jsonData.length; i++) 
-			$('#advSelect').append($("<option></option>").attr("value",jsonData[i].id).text(jsonData[i].name)); 
+			$('#adv').append($("<option></option>").attr("value",jsonData[i].id).text(jsonData[i].name)); 
 	});
 });
 
-$("#advSelect").change(function(){
+$("#adv").change(function(){
 	$('form').toggle("slow");
 	$('#btnHideSelects').show();
 	drawBarChart(data);	

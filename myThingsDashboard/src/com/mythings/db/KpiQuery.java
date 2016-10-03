@@ -43,8 +43,8 @@ public class KpiQuery {
 		int id = Integer.parseInt(exchId);
 	
 		query = "SELECT distinct ADV_PROJECT.ADV_PROJECT_ID , ADV_PROJECT.ADV_PROJECT_NAME"
-			  + " from ADV_PROJECT , KPI_MAINTABLE"
-			  + " where ADV_PROJECT.ADV_PROJECT_ID=KPI_MAINTABLE.ADV_PROJECT_ID and KPI_MAINTABLE.PRT_CAMPAIGN_ID=" + id;
+			  + " FROM ADV_PROJECT , KPI_MAINTABLE"
+			  + " WHERE ADV_PROJECT.ADV_PROJECT_ID=KPI_MAINTABLE.ADV_PROJECT_ID AND KPI_MAINTABLE.PRT_CAMPAIGN_ID=" + id;
 	
 		pst= con.prepareStatement(query);
 	  

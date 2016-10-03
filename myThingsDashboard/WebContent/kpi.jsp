@@ -123,7 +123,7 @@
 		        	<div class="form-group">
 		            	<label for="firstname" class="col-sm-2 control-label">Exchange</label>         
 		            	<div class="col-sm-10">
-		            		<select class="form-control" id="exSelect">
+		            		<select class="form-control" id="exch">
 		                    	<option>select</option>
 			  				</select>
 		            	</div>
@@ -132,7 +132,7 @@
 		            <div class="form-group">
 		            	<label for="lastname" class="col-sm-2 control-label">Advertiser</label>
 		                <div class="col-sm-10">
-		                	<select class="form-control" id="advSelect">
+		                	<select class="form-control" id="adv">
 			  					<option>select</option>
 			  				</select>
 		                </div>
@@ -141,7 +141,7 @@
 		            <div class="form-group">
 		            	<label for="emailid" class="col-sm-2 control-label">Campaign</label>
 		                <div class="col-sm-10">
-		                	<select class="form-control" id="campaignSelect">
+		                	<select class="form-control" id="camp">
 			  					<option>select</option>
 			  				</select>
 		                </div>
@@ -150,7 +150,7 @@
 		            <div class="form-group">
 		            	<label for="emailid" class="col-sm-2 control-label">Ad-Group</label>
 		                <div class="col-sm-10">
-		                	<select class="form-control" id="adgroupSelect">
+		                	<select class="form-control" id="adGroup">
 			  					<option>select</option>
 			  				</select>
 		                </div>
@@ -159,7 +159,7 @@
 		             <div class="form-group">
 		            	<label for="emailid" class="col-sm-2 control-label">Creative</label>
 		                <div class="col-sm-10">
-		                	<select class="form-control" id="creativeSelect">
+		                	<select class="form-control" id="creative">
 			  					<option>select</option>
 			  				</select>
 		                </div>
