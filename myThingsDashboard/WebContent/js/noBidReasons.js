@@ -5,15 +5,17 @@ var root =
 $(document).ready(function() {
 
 	// Load select input values
-	$.get("getdata?func=getEx", function(data){
+	/*$.get("getdata?func=getEx", function(data){
 		var jsonData = JSON.parse(data);
         for(var i = 0; i < jsonData.length; i++) 
         	$('#exSelect').append($("<option></option>").attr("value",jsonData[i].id).text(jsonData[i].name)); 
-    });
+    });*/
+	$('.date').mask('00/00/0000', {placeholder: "MM/DD/YYYY"});
+	$('.time').mask('00:00', {placeholder: "00:00"});
 });
 
 $("#exSelect").change(function() {
-   
+	alert($('#referDate').val());
     $('#noBid').html('<div class="input-group-addon">NoBidReasons</div>');
     $('#noBid').append('<select class="form-control" id="noBidReasonSelect" name="multiselect[]" multiple="multiple"></select>');
 

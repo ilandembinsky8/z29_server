@@ -31,7 +31,7 @@
 	<div class="container">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -101,7 +101,7 @@
        
 		<div class="row">    	
 			<div class="col-xs-12">
-				<form class="form-horizontal" role="form">
+				<form class="form-horizontal">
 					
 			    	<div class="form-group">
 			        	<h4 class="col-xs-12">Date &amp; Time</h4>
@@ -111,11 +111,11 @@
 			            <div class="col-xs-12 col-sm-10">
 			            	<div class="input-group col-sm-3">
 			            		<div class="input-group-addon">Date</div>
-			                    <input class="form-control" type="date" id="">
+			                    <input class="form-control date" type="text" id="referDate"/>
 			                </div>
 			                <div class="input-group col-sm-3">
 			            		<div class="input-group-addon">Time</div>
-			                    <input class="form-control" type="time" id="">
+			                    <input class="form-control time" type="text" id="referTime"/>
 			                </div>
 			            </div>
 			           	<div class="col-xs-12 col-sm-2 margin-bottom-6">
@@ -124,11 +124,11 @@
 			            <div class="col-xs-12 col-sm-10">
 			            	<div class="input-group col-sm-3">
 			            		<div class="input-group-addon">Date</div>
-			                    <input class="form-control" type="date" id="">
+			                    <input class="form-control date" type="text" id=""/>
 			                </div>
 			                <div class="input-group col-sm-3">
 			            		<div class="input-group-addon">Time</div>
-			                    <input class="form-control" type="time" id="">
+			                    <input class="form-control time" type="text" id=""/>
 			                </div>
 			            </div>
 			        </div>
@@ -153,6 +153,7 @@
     </div>
 
   	<script src="js/jquery.min.js"></script>
+  	<script src="js/mask.min.js"></script>
     <script src="js/dashboard.js"></script>
     <script src="js/bootstrap-multiselect.js"></script>
     <script src="js/bootstrap.min.js"></script>
