@@ -107,8 +107,8 @@ treeJSON = d3.json('', function(error, treeData1) {
     function initiateDrag(d, domNode) {
         draggingNode = d;
         d3.select(domNode).select('.ghostCircle').attr('pointer-events', 'none');
-        d3.selectAll('.ghostCircle').attr('class', 'ghostCircle show');
-        d3.select(domNode).attr('class', 'node activeDrag');
+      //  d3.selectAll('.ghostCircle').attr('class', 'ghostCircle show');
+       // d3.select(domNode).attr('class', 'node activeDrag');
 
         svgGroup.selectAll("g.node").sort(function(a, b) { // select the parent and sort the path's
             if (a.id != draggingNode.id) return 1; // a is not the hovered element, send "a" to the back
@@ -160,7 +160,7 @@ treeJSON = d3.json('', function(error, treeData1) {
             if (d == root) {
                 return;
             }
-            dragStarted = true;
+            dragStarted = false;
             nodes = tree.nodes(d);
             d3.event.sourceEvent.stopPropagation();
             // it's important that we suppress the mouseover event on the node being dragged. Otherwise it will absorb the mouseover event and the underlying node will not detect it d3.select(this).attr('pointer-events', 'none');
