@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -60,17 +63,18 @@ public class NoBidQuery {
 	}
 	
 	
-	public static String getAdv(Connection con,String exchangeId,String... noBidId ) throws SQLException{
-		
+	public static String getAdv(Connection con,String exchangeId,List noBidIds ) throws SQLException{
+		String nobidQuery="NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID="+noBidIds.get(0); 
 		System.out.println("start getAdv.....");
 		jArr = new JsonArray();
 		int id = Integer.parseInt(exchangeId);
 	
-		for(int i=0;i<noBidId.length;i++){
+		for(int i=1;i<noBidIds.size();i++)
+			nobidQuery+=" OR NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID="+noBidIds.get(i);
+					
 			query = "SELECT DISTINCT ADV_PROJECT.ADV_PROJECT_ID,ADV_PROJECT.ADV_PROJECT_NAME"
 				  + " FROM ADV_PROJECT,NOBID_MAINTABLE WHERE NOBID_MAINTABLE.PRT_CAMPAIGN_ID="+id+" AND"
-	  			  + " NOBID_MAINTABLE.NO_BID_REASON_TYPE_ID="+noBidId[i]+" AND"
-	  			  + " ADV_PROJECT.ADV_PROJECT_ID=NOBID_MAINTABLE.ADV_PROJECT_ID"
+	  			  + "( "+nobidQuery+" )AND ADV_PROJECT.ADV_PROJECT_ID=NOBID_MAINTABLE.ADV_PROJECT_ID"
 	  			  + " LIMIT 3";
 	
 	    st = con.createStatement();
@@ -80,12 +84,12 @@ public class NoBidQuery {
 			jObj = new JsonObject();
 			//jObj.addProperty("id", rs.getInt(1));
 			jObj.addProperty("name", rs.getString(2));
-			jObj.add("children",getAdvCompaign(con,exchangeId,noBidId[i], rs.getInt(1)));
+		//	jObj.add("children",getAdvCompaign(con,exchangeId,noBidIds[i], rs.getInt(1)));
 			jArr.add(jObj);
 		}
 		
 		System.out.println("Finished getAdv");
-	}
+	
 		return "{"+"\"name\":\"Global\",\"children\":" + jArr.toString() + "}";
 	}	
 	

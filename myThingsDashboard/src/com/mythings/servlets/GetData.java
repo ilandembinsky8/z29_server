@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 //import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSerializer;
 import com.mythings.db.MyConnection;
 import com.mythings.db.NoBidQuery;
 
@@ -32,7 +40,8 @@ public class GetData extends HttpServlet {
 		
 		MyConnection con=null;
 		PrintWriter out = response.getWriter();
-		String exchangeId, noBidId, advCampId, campaignId;
+		String exchangeId,noBidId, advCampId, campaignId;
+		List noBidIds =new ArrayList<String>();
 		String func = request.getParameter("func");
 		
 	    try {
@@ -64,7 +73,18 @@ public class GetData extends HttpServlet {
 				
 				exchangeId = request.getParameter("exchId");
 				noBidId = request.getParameter("noBidId");
-				out.print(NoBidQuery.getAdv(con.getCon(),exchangeId,noBidId));
+				Gson gson = new Gson();
+				JsonParser jsonParser = new JsonParser();
+				JsonArray jsonArray = (JsonArray) jsonParser.parse(noBidId);
+				
+				if (jsonArray != null) { 
+				   int len = jsonArray.size();
+				   for (int i=0;i<len;i++){ 
+					   noBidIds.add(jsonArray.get(i).toString());
+				   } 
+				}
+	            
+				out.print(NoBidQuery.getAdv(con.getCon(),exchangeId,noBidIds));
 			}
 			else if(func.equals("getAdvCompaign")){
 				
