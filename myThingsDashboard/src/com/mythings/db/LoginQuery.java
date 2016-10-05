@@ -17,7 +17,7 @@ public class LoginQuery {
 	public static boolean checkID(Connection con, String id) throws NumberFormatException, SQLException{
 		
 		st =  con.createStatement();
-		rs = st.executeQuery("SELECT * FROM Admin where id="+ Integer.parseInt(id));
+		rs = st.executeQuery("SELECT * FROM Users where id="+ Integer.parseInt(id));
 		return rs.next();
 	}
 	
@@ -25,7 +25,7 @@ public class LoginQuery {
 	public static boolean checkPass(Connection con, String id, String pass) throws SQLException{
 		
 		st =  con.createStatement();
-		rs = st.executeQuery("SELECT * FROM Admin where id="+ Integer.parseInt(id) + " AND pass='" + pass + "';");
+		rs = st.executeQuery("SELECT * FROM Users where id="+ Integer.parseInt(id) + " AND pass='" + pass + "';");
 		return rs.next();
 	}
 }

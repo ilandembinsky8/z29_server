@@ -14,6 +14,10 @@ public class Test {
 		
 		MyConnection con = new MyConnection();
 
-		System.out.println( KpiQuery.getAdvCompaign(con.getCon(), "10159", 183, "dsfsdf", "sdfsfd") );
+		//System.out.println( KpiQuery.getAdvCompaign(con.getCon(), "10159", 183, "dsfsdf", "sdfsfd") );
+		
+		System.out.println(NoBidQuery.getNoBidReasons(con.getCon(),"10159"));
+		
+		
 	}
 }

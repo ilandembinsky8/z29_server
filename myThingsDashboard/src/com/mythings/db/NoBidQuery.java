@@ -24,6 +24,7 @@ public class NoBidQuery {
 	
 	public static String getExchange(Connection con) throws SQLException{
 		
+		System.out.println("getExchange Started");
 		st =  con.createStatement();
 		rs = st.executeQuery("SELECT * FROM Updated.NOBID_PRT_CAMPAIGN;");
 		jArr = new JsonArray();
@@ -35,12 +36,14 @@ public class NoBidQuery {
 			jArr.add(jObj);
 		}
 		
+		System.out.println("getExchange Finished");
         return jArr.toString();
 	}	
 	
 	
 	public static String getNoBidReasons(Connection con,String exchangeId ) throws SQLException{
 			
+		System.out.println("getNoBIdReasons Started");
 	    jArr = new JsonArray();
 	    int id = Integer.parseInt(exchangeId);
 	    
@@ -58,7 +61,7 @@ public class NoBidQuery {
 			jObj.addProperty("name", rs.getString(2));
 			jArr.add(jObj);
 		}
-			
+		System.out.println("getNoBIdReasons Finished");
 		return jArr.toString();
 	}
 	

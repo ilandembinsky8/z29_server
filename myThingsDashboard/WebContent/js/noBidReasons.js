@@ -14,16 +14,16 @@ $(document).ready(function() {
 $("#exSelect").change(function() {
 	
     $('#noBid').html('<div class="input-group-addon">NoBidReasons</div>');
-    $('#noBid').append('<select class="form-control" id="noBidReasonSelect" name="multiselect[]" multiple="multiple"><option>a</option><option>b</option></select>');
+    $('#noBid').append('<select class="form-control" id="noBidReasonSelect" name="multiselect[]" multiple="multiple"></select>');
     $('#btn_send').html(' <div class="form-group"><div class="col-sm-offset-2 col-sm-10"><button id="" type="button" class="btn btn-primary">Submit</button></div>');
 
     var exchSelectedId = $("#exSelect option:selected").val();
-    //$.get("getdata?func=getNoBid&exchId=" + exchSelectedId, function(data) {
+    $.get("getdata?func=getNoBid&exchId=" + exchSelectedId, function(data) {
         
-    	//var jsonData = JSON.parse(data);
+    	var jsonData = JSON.parse(data);
     	
-        //for (var i = 0; i < jsonData.length; i++) 
-            //$('#noBidReasonSelect').append($("<option></option>").attr("value", jsonData[i].id).text(jsonData[i].name));
+        for (var i = 0; i < jsonData.length; i++) 
+            $('#noBidReasonSelect').append($("<option></option>").attr("value", jsonData[i].id).text(jsonData[i].name));
         
         $('#noBidReasonSelect').multiselect({
             nonSelectedText: 'Choose NoBids!',
@@ -50,6 +50,6 @@ $("#exSelect").change(function() {
                  //});
              }
         });
-    //});
+    });
 });
 
