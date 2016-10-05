@@ -87,4 +87,34 @@ public class KpiQuery {
 	  return jArr.toString();
 	}
 	
+	
+	public static String getAdGroup(Connection con,String exchangeId, int idAdv,int idCmp,
+			String from,String to) throws SQLException{
+		
+		jArr = new JsonArray();
+		int id = Integer.parseInt(exchangeId);
+		
+		System.out.println("add AdGroup");
+		
+		query = "SELECT distinct ADGROUP.ADGROUP_ID , ADGROUP.AD_GROUP_NAME"
+			+" FROM ADGROUP , KPI_MAINTABLE"
+			+" WHERE ADGROUP.ADGROUP_ID = KPI_MAINTABLE.ADGROUP_ID"
+			+" AND KPI_MAINTABLE.PRT_CAMPAIGN_ID="+id
+			+" AND KPI_MAINTABLE.ADV_PROJECT_ID="+idAdv
+			+" AND KPI_MAINTABLE.ADV_CAMPAIGN_ID="+idCmp;
+
+		st = con.createStatement();
+		rs = st.executeQuery(query);
+		
+		while(rs.next()){
+			jObj = new JsonObject();
+		//	jObj.addProperty("id", rs.getInt(1));
+			jObj.addProperty("name", rs.getString(2));
+		//	jObj.add("children",getAdGroup(con,exchangeId,noBidId,idAdv, rs.getInt(1)));
+			jArr.add(jObj);
+		}
+	
+	  return jArr.toString();
+	}
+	
 }
