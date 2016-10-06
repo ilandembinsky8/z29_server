@@ -117,4 +117,34 @@ public class KpiQuery {
 	  return jArr.toString();
 	}
 	
+	public static String getCreative(Connection con,String exchangeId, int idAdv,int idCmp,
+			int idGrp,String from,String to) throws SQLException{
+		
+		jArr = new JsonArray();
+		int id = Integer.parseInt(exchangeId);
+		
+		System.out.println("add Creative");
+		
+		query = "SELECT distinct ADV_PROJECT_CREATIVE.ADV_PROJECT_CREATIVE_ID , ADV_PROJECT_CREATIVE.CREATIVE_NAME"
+			+" FROM ADV_PROJECT_CREATIVE , KPI_MAINTABLE"
+			+" WHERE ADV_PROJECT_CREATIVE.ADV_PROJECT_CREATIVE_ID = KPI_MAINTABLE.ADV_PROJECT_CREATIVE_ID"
+			+" AND KPI_MAINTABLE.PRT_CAMPAIGN_ID="+id
+			+" AND KPI_MAINTABLE.ADV_PROJECT_ID="+idAdv
+			+" AND KPI_MAINTABLE.ADV_CAMPAIGN_ID="+idCmp
+			+" AND KPI_MAINTABLE.ADV_PROJECT_CREATIVE_ID"+idGrp;
+
+		st = con.createStatement();
+		rs = st.executeQuery(query);
+		
+		while(rs.next()){
+			jObj = new JsonObject();
+		//	jObj.addProperty("id", rs.getInt(1));
+			jObj.addProperty("name", rs.getString(2));
+		//	jObj.add("children",getAdGroup(con,exchangeId,noBidId,idAdv, rs.getInt(1)));
+			jArr.add(jObj);
+		}
+	
+	  return jArr.toString();
+	}
+	
 }
