@@ -9,19 +9,23 @@ $(document).ready(function() {
     });
 });
 
-
 $("#exch").change(function(){
 	var val = this.value;
 	$("#adv").html($("<option></option>").text("select")); 
 	$.get("getkpidata?func=getAdv&exchId=" + val, function(data){
 		var jsonData = JSON.parse(data);
-		for(var i = 0; i < jsonData.length; i++) 
+		for(var i = 0; i < jsonData.length; i++)
 			$('#adv').append($("<option></option>").attr("value",jsonData[i].id).text(jsonData[i].name)); 
 	});
 });
 
 $("#adv").change(function(){
-	$('form').toggle("slow");
-	$('#btnHideSelects').show();
-	drawBarChart(data);	
+	var val = this.value;
+	$("cmp").html($("<option></option>").text("select")); 
+	$.get("getkpidata?func=getCmp&exchId&advId=" + val, function(data) {
+		var jsonData = JSON.parse(data);
+		for(var i=0;i<jsonData.length;i++)
+			$('#cmp').append($("<option></option>").attr("value",jsonData[i].id).text(jsonData[i].name));
+	});
 });
+

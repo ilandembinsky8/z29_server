@@ -81,7 +81,7 @@ public class GetData extends HttpServlet {
 				   int len = jsonArray.size();
 				   for (int i=0;i<len;i++){ 
 					   noBidIds.add(jsonArray.get(i).toString());
-				   } 
+				   }
 				}
 	            
 				out.print(NoBidQuery.getAdv(con.getCon(),exchangeId,noBidIds));

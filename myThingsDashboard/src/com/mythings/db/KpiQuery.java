@@ -59,7 +59,7 @@ public class KpiQuery {
 		return jArr.toString();
 	}
 	
-	public static String getAdvCompaign(Connection con,String exchangeId, int idAdv,
+	public static String getAdvCampaign(Connection con,String exchangeId, int idAdv,
 			String from,String to) throws SQLException{
 		
 		jArr = new JsonArray();

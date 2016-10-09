@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import com.mythings.db.KpiQuery;
 import com.mythings.db.MyConnection;
 
-
 /**
  * Servlet implementation class GetKpiData
  */
@@ -55,6 +54,14 @@ public class GetKpiData extends HttpServlet {
 				String exchangeId = request.getParameter("exchId");
 				out.print(KpiQuery.getAdv(con.getCon(),exchangeId));
 			}
+			else if(func.equals("getCmp")){
+				
+				String exchangeId = request.getParameter("exchId");
+				int advId = Integer.parseInt(request.getParameter("advId"));
+				out.print(KpiQuery.getAdvCampaign(con.getCon(), exchangeId, advId, "from", "to"));
+			}
+			
+			
 		}catch(SQLException e){ e.printStackTrace(); }
 		
 		out.close();
