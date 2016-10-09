@@ -29,3 +29,22 @@ $("#adv").change(function(){
 	});
 });
 
+$("#cmp").change(function(){
+	var val = this.value;
+	$("adGrp").html($("<option></option>").text("select")); 
+	$.get("getkpidata?func=getGrp&exchId&advId&cmpId=" + val, function(data) {
+		var jsonData = JSON.parse(data);
+		for(var i=0;i<jsonData.length;i++)
+			$('#adGrp').append($("<option></option>").attr("value",jsonData[i].id).text(jsonData[i].name));
+	});
+});
+
+$("#adGrp").change(function(){
+	var val = this.value;
+	$("creative").html($("<option></option>").text("select")); 
+	$.get("getkpidata?func=getCreative&exchId&advId&cmpId&grpId=" + val, function(data) {
+		var jsonData = JSON.parse(data);
+		for(var i=0;i<jsonData.length;i++)
+			$('#creative').append($("<option></option>").attr("value",jsonData[i].id).text(jsonData[i].name));
+	});
+});

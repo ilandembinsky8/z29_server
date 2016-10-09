@@ -60,6 +60,21 @@ public class GetKpiData extends HttpServlet {
 				int advId = Integer.parseInt(request.getParameter("advId"));
 				out.print(KpiQuery.getAdvCampaign(con.getCon(), exchangeId, advId, "from", "to"));
 			}
+			else if(func.equals("getGrp")){
+				
+				String exchangeId = request.getParameter("exchId");
+				int advId = Integer.parseInt(request.getParameter("advId"));
+				int cmpId = Integer.parseInt(request.getParameter("cmpId"));
+				out.print(KpiQuery.getAdGroup(con.getCon(), exchangeId, advId, cmpId, "from", "to"));  
+			}
+			else if(func.equals("getCreative")){
+				
+				String exchangeId = request.getParameter("exchId");
+				int advId = Integer.parseInt(request.getParameter("advId"));
+				int cmpId = Integer.parseInt(request.getParameter("cmpId"));
+				int grpId = Integer.parseInt(request.getParameter("grpId"));
+				out.print(KpiQuery.getCreative(con.getCon(), exchangeId, advId, cmpId, grpId, "from", "to"));
+			}
 			
 			
 		}catch(SQLException e){ e.printStackTrace(); }
