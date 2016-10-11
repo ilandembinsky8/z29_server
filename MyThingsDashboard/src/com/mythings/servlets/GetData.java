@@ -30,7 +30,7 @@ public class GetData extends HttpServlet {
 		
 		MyConnection con=null;
 		PrintWriter out = response.getWriter();
-		String date,exchangeId,noBidId;
+		String refDate, compDate,exchangeId,noBidId;
 		String func = request.getParameter("func");
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
@@ -82,15 +82,17 @@ public class GetData extends HttpServlet {
 		//******************changed by Avgana************************////  
 				exchangeId = request.getParameter("exchId");
 				noBidId = request.getParameter("noBidId");
-				date = request.getParameter("refDate");
+				System.out.println(noBidId);
+				refDate = request.getParameter("refDate");
+				compDate = request.getParameter("compDate");
 //				String s = NoBidQuery.getAdv(con.getCon(),exchangeId,noBidId);
 //				System.out.println(s);
-				System.out.println(date);
+				System.out.println(refDate + ", " + compDate);
 //				String day = date.substring(3, 5);
 //				String month = date.substring(0, 2);
 //				String year = date.substring(6, 10);
 //				date = year + "-" + month + "-" + day;
-				out.print(NoBidQuery.getAdv(con.getCon2(),exchangeId, date, noBidId));		
+				out.print(NoBidQuery.getAdv(con.getCon2(),exchangeId, refDate, compDate, noBidId));		
 			}			
 
 		} catch (SQLException e) { e.printStackTrace(); }
