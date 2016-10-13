@@ -59,13 +59,13 @@ public class NoBidQuery {
 		return jArr.toString();
 	}
 
-	public static String getAdv(Connection con, String exchangeId, String date/*, String hour*/, String compToDate, String noBidId) throws SQLException {
+	public static String getAdv(Connection con, String exchangeId, String refdate, String refhour, String comphour, String compToDate, String noBidId) throws SQLException {
 //***************convert noDibReasonArray to String Array ****************		
 		String[] strArr = noBidId.toString().split(",");
 		String queryNobid = ""+strArr[0];
 //***********************************************************************		
 		System.out.println("start getAdv.....");
-		System.out.println(date);
+//		System.out.println(date);
 		JsonArray jArr = new JsonArray();
 		int id = Integer.parseInt(exchangeId);
 		JsonObject root = new JsonObject();
@@ -87,11 +87,17 @@ public class NoBidQuery {
 				+ " AND"
 				+ " (nobid_reasons_main_updated.NO_BID_REASON_TYPE_ID="
 				+ queryNobid
-				/*+ " AND"
-				+ " nobid_reasons_main_updated.EVENT_TIME="
-				+ hour*/
-				+ ") and nobid_reasons_main_updated.EVENT_DATE=\'"
-				+ date + "\'" 
+//				+ " AND"
+//				+ " nobid_reasons_main_updated.EVENT_TIME="
+//				+ refhour
+				+ ") and ((nobid_reasons_main_updated.EVENT_DATE=\'"
+				+ refdate + "\')"
+				+ " and (nobid_reasons_main_updated.EVENT_TIME="
+				+ refhour
+				+ ") or (nobid_reasons_main_updated.EVENT_DATE=\'"
+				+ compToDate + "\')"
+				+ " and (nobid_reasons_main_updated.EVENT_TIME=\'"
+				+ comphour + "\'))"
 				+ " group by ADV_PROJECT_ID"
 				+ " LIMIT 3";
 
@@ -105,7 +111,7 @@ public class NoBidQuery {
 			
 			jObj = new JsonObject();
 			jObj.addProperty("name", rs.getString(2));
-			jObj.add("children", getAdvCompaign(con, exchangeId, rs.getString(3),rs.getInt(1), date,compToDate).getAsJsonArray());
+			jObj.add("children", getAdvCompaign(con, exchangeId, rs.getString(3),rs.getInt(1), refdate, refhour, comphour, compToDate).getAsJsonArray());
 			refTotalCount[0] += refTotalCount[1];
 			compTotalCount[0] += compTotalCount[1];
 			jObj.addProperty("count",refTotalCount[1]);
@@ -122,7 +128,7 @@ public class NoBidQuery {
 		return root.toString().replace(" ", "");
 	}
 
-	public static JsonArray getAdvCompaign(Connection con,String exchangeId, String noBidId, int idAdv, String date,String compToDate) throws SQLException {
+	public static JsonArray getAdvCompaign(Connection con,String exchangeId, String noBidId, int idAdv, String refdate,String refhour, String comphour, String compToDate) throws SQLException {
 
 		JsonArray jArr = new JsonArray();
 		int id = Integer.parseInt(exchangeId);
@@ -137,8 +143,14 @@ public class NoBidQuery {
 				+ id
 				+ " AND nobid_reasons_main_updated.NO_BID_REASON_TYPE_ID="
 				+ noBidId
-				+ " and nobid_reasons_main_updated.EVENT_DATE=\'"
-				+ date + "\'" 
+				+ " and ((nobid_reasons_main_updated.EVENT_DATE=\'"
+				+ refdate + "\')"
+				+ " and (nobid_reasons_main_updated.EVENT_TIME="
+				+ refhour
+				+ ") or (nobid_reasons_main_updated.EVENT_DATE=\'"
+				+ compToDate + "\')"
+				+ " and (nobid_reasons_main_updated.EVENT_TIME=\'"
+				+ comphour + "\'))" 
 				+ " and ADV_PROJECT.ADV_PROJECT_ID=" + idAdv + " LIMIT 4";
 
 		st = con.createStatement();
@@ -149,7 +161,7 @@ public class NoBidQuery {
 		while (rs.next()) {
 			jObj = new JsonObject();
 			jObj.addProperty("name", rs.getString(2));
-			jObj.add("children", getAdGroup(con, exchangeId, noBidId, idAdv, rs.getInt(1), date,compToDate).getAsJsonArray());
+			jObj.add("children", getAdGroup(con, exchangeId, noBidId, idAdv, rs.getInt(1), refdate,refhour, comphour, compToDate).getAsJsonArray());
 			refTotalCount[1] += refTotalCount[2];
 			compTotalCount[1] += compTotalCount[2];
 			jObj.addProperty("count",refTotalCount[2]);
@@ -160,7 +172,7 @@ public class NoBidQuery {
 		return jArr;
 	}
 
-	public static JsonArray getAdGroup(Connection con, String exchangeId, String noBidId, int idAdv, int idCompaign, String date,String compToDate) throws SQLException {
+	public static JsonArray getAdGroup(Connection con, String exchangeId, String noBidId, int idAdv, int idCompaign, String refdate,String refhour, String comphour, String compToDate) throws SQLException {
 
 		System.out.println("add adgroup for " + idCompaign);
 
@@ -176,8 +188,14 @@ public class NoBidQuery {
 				+ " and nobid_reasons_main_updated.NO_BID_REASON_TYPE_ID=" + noBidId
 				+ " and ADV_PROJECT.ADV_PROJECT_ID=" + idAdv
 				+ " and ADV_CAMPAIGN.ADV_CAMPAIGN_ID=" + idCompaign
-				+ " and nobid_reasons_main_updated.EVENT_DATE=\'"
-				+ date + "\'" 
+				+ " and ((nobid_reasons_main_updated.EVENT_DATE=\'"
+				+ refdate + "\')"
+				+ " and (nobid_reasons_main_updated.EVENT_TIME="
+				+ refhour
+				+ ") or (nobid_reasons_main_updated.EVENT_DATE=\'"
+				+ compToDate + "\')"
+				+ " and (nobid_reasons_main_updated.EVENT_TIME=\'"
+				+ comphour + "\'))" 
 				+ " LIMIT 5";
 
 		st = con.createStatement();
@@ -189,7 +207,7 @@ public class NoBidQuery {
 			jObj = new JsonObject();
 			jObj.addProperty("name", rs.getString(2));
 			//lina
-			jObj.add("children", getCreatives(con, exchangeId, noBidId, idAdv, idCompaign, rs.getInt(1),date, compToDate).getAsJsonArray());
+			jObj.add("children", getCreatives(con, exchangeId, noBidId, idAdv, idCompaign, rs.getInt(1),refdate,refhour,comphour, compToDate).getAsJsonArray());
 			refTotalCount[2] += refTotalCount[3];
 			compTotalCount[2] += compTotalCount[3];
 			jObj.addProperty("count",refTotalCount[3]);
@@ -201,7 +219,7 @@ public class NoBidQuery {
 	}
 
 	//lina
-	public static JsonArray getCreatives(Connection con, String exchangeId, String noBidId, int advId, int idCampaign, int adGroup, String date,String compToDate) throws SQLException {
+	public static JsonArray getCreatives(Connection con, String exchangeId, String noBidId, int advId, int idCampaign, int adGroup, String refdate,String refhour, String comphour,String compToDate) throws SQLException {
 
 		System.out.println("getCreatives Started");
 		System.out.println("add Creative for " + adGroup);
@@ -220,8 +238,11 @@ public class NoBidQuery {
 				+ " AND ADV_CAMPAIGN.ADV_CAMPAIGN_ID="
 				+ idCampaign
 				+ " AND ADGROUP.ADGROUP_ID=" + adGroup
+				+ " AND"
+				+ " nobid_reasons_main_updated.EVENT_TIME="
+				+ refhour
 				+ " and nobid_reasons_main_updated.EVENT_DATE=\'"
-				+ date + "\'";
+				+ refdate + "\'";
 
 //		st = con.createStatement();
 //		ResultSet rs = st.executeQuery(query);
@@ -231,9 +252,9 @@ public class NoBidQuery {
 		refTotalCount[3]= 0;
 		compTotalCount[3]= 0;
 		
-		JsonArray jArr = calculateCount(con,exchangeId,noBidId, advId, idCampaign,  adGroup,date,query,"count", 1);
+		JsonArray jArr = calculateCount(con,exchangeId,noBidId, advId, idCampaign,  adGroup,refdate,refhour,query,"count", 1);
 //		jArr = calculateCount(con,exchangeId,noBidId, advId, idCampaign,  adGroup,date, compToDate,query,"cntComp");
-		date = compToDate;
+//		date = compToDate;
 		query = "SELECT distinct ADV_PROJECT_CREATIVE.ADV_PROJECT_CREATIVE_ID, ADV_PROJECT_CREATIVE.CREATIVE_NAME"
 				+ " FROM ADV_PROJECT,nobid_reasons_main_updated,ADV_CAMPAIGN,ADGROUP,ADV_PROJECT_CREATIVE"
 				+ " WHERE nobid_reasons_main_updated.ADV_PROJECT_ID=ADV_PROJECT.ADV_PROJECT_ID "
@@ -248,10 +269,13 @@ public class NoBidQuery {
 				+ " AND ADV_CAMPAIGN.ADV_CAMPAIGN_ID="
 				+ idCampaign
 				+ " AND ADGROUP.ADGROUP_ID=" + adGroup
+				+ " AND"
+				+ " nobid_reasons_main_updated.EVENT_TIME="
+				+ comphour
 				+ " and nobid_reasons_main_updated.EVENT_DATE=\'"
-				+ date + "\'";
+				+ compToDate + "\'";
 		
-		JsonArray jArr1 = (calculateCount(con,exchangeId,noBidId, advId, idCampaign,  adGroup, compToDate,query,"cntComp", 2));
+		JsonArray jArr1 = (calculateCount(con,exchangeId,noBidId, advId, idCampaign,  adGroup, compToDate, comphour,query,"cntComp", 2));
 //		jArr1.
 //		JsonObject a = new JsonObject();
 //		jArr1.get(0).getAsJsonObject().get("cntComp");
@@ -261,17 +285,19 @@ public class NoBidQuery {
 //			int b = jArr1.get(0).getAsInt();
 			c = c.replaceAll("\"", "");
 			jArr.get(i).getAsJsonObject().addProperty("cntComp",c );
+			refTotalCount[3] += jArr.get(i).getAsJsonObject().get("count").getAsInt();
+			compTotalCount[3] += jArr.get(i).getAsJsonObject().get("cntComp").getAsInt();
 		}
 		
 		
 
 		System.out.println("getCreatives Finished");
-		System.out.println("1.jArr = " + jArr.toString());
-		System.out.println("2.jArr = " + jArr1.toString());
+//		System.out.println("1.jArr = " + jArr.toString());
+//		System.out.println("2.jArr = " + jArr1.toString());
 		return jArr;
 	}
 	
-	public static JsonArray calculateCount(Connection con, String exchangeId, String noBidId, int advId, int idCampaign, int adGroup, String date, String query, String name, int current) throws NumberFormatException, SQLException{
+	public static JsonArray calculateCount(Connection con, String exchangeId, String noBidId, int advId, int idCampaign, int adGroup, String date,String hour, String query, String name, int current) throws NumberFormatException, SQLException{
 		JsonArray jArr = new JsonArray();
 		JsonObject jObj ;
 		//jObj.a
@@ -284,18 +310,18 @@ public class NoBidQuery {
 			int num;
 			jObj = new JsonObject();
 			jObj.addProperty("name", rs.getString(2));	
-			refCnt = getCount(con, exchangeId, noBidId, advId, idCampaign, adGroup, rs.getInt(1), date);
+			refCnt = getCount(con, exchangeId, noBidId, advId, idCampaign, adGroup, rs.getInt(1), date, hour);
 			
 			//lina
 			
 			//String compCnt = getCount(con, exchangeId, noBidId, advId, idCampaign, adGroup, rs.getInt(1), compToDate);
 		
 			num = Integer.parseInt(refCnt);
-			System.out.println("num="+num);
-			if(current == 1)
-				refTotalCount[3] += num;
-			else if(current == 2)
-				compTotalCount[3] += num;
+//			System.out.println("num="+num);
+//			if(current == 1)
+//				refTotalCount[3] += num;
+//			else if(current == 2)
+//				compTotalCount[3] += num;
 			jObj.addProperty(name, refCnt);	
 			
 			//System.out.print("compareToDate="+compToDate);
@@ -309,7 +335,7 @@ public class NoBidQuery {
 		
 		return jArr;
 	}
-	public static String getCount(Connection con, String exchangeId, String noBidId, int advId, int idCampaign, int adGroup, int creative, String date) throws SQLException{
+	public static String getCount(Connection con, String exchangeId, String noBidId, int advId, int idCampaign, int adGroup, int creative, String date, String hour) throws SQLException{
 		query = "SELECT nobid_reasons_main_updated.EVENT_TIME, SUM(nobid_reasons_main_updated.CNT) AS COUNTER"
 				+" FROM ADV_PROJECT,nobid_reasons_main_updated,ADV_CAMPAIGN,ADGROUP,ADV_PROJECT_CREATIVE"
 				+" WHERE  nobid_reasons_main_updated.ADV_PROJECT_ID=ADV_PROJECT.ADV_PROJECT_ID and"

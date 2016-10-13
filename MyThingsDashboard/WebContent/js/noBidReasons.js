@@ -14,10 +14,11 @@ $("#exSelect").change(function() {
     $.get("getdata?func=getNoBid&exchId=" + exchSelectedId, function(data) {
 //*********************** Added by Avgana *******************************//
     	var refDate = $("#referDate").val();
-//      
-//    	alert(refDate);
+        var referTime = $("#referTime").val();
+//    	alert(referTime);
         var compDate = $("#compareDate").val();
-//        alert(compDate);
+        var compareTime = $("#compareTime").val();
+//        alert(compareTime);
 //*********************** start-changed multiSelect by Osama*********************************//
     	  var selectedValues=[];
           function onDeselect(e){
@@ -69,7 +70,7 @@ $("#exSelect").change(function() {
 //          for(var i=0;i<1;i++)
 //        	  alert(i + ". " + selectedValues[i]);
           $("#submit_btn").click(function(){
-        	  $.get("getdata?func=getAdv&exchId=" + exchSelectedId+"&noBidId=" + selectedValues + "&refDate=" + refDate + "&compDate=" + compDate, function(root){
+        	  $.get("getdata?func=getAdv&exchId=" + exchSelectedId+"&noBidId=" + selectedValues + "&refDate=" + refDate + "&refHour=" + referTime + "&compDate=" + compDate + "&compHour=" + compareTime, function(root){
         	  $('#tree-container').empty();
          	  $('#tree-container').show();
 //         	  alert(jsondata);

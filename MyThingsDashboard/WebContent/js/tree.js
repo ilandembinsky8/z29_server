@@ -442,16 +442,13 @@ treeJSON = d3.json('', function(error, treeData1) {
                 return d.children || d._children ? "end" : "start";
             })
             .text(function(d) {
-//            	alert(d.name);
-//            	alert(d.count);
-//            	alert(d.cntComp);
             	if(d.count == d.cntComp)
-            		return d.name + ": there was no changes!";
+            		return d.name + ", " + d.count + " there was no changes!";
             	else if(d.count == 0 && d.cntComp != 0)
             		return d.name + ", " + d.count+", -100%";
             	else if(d.count != 0 && d.cntComp == 0)
             		return d.name + ", " + d.count + ", +100%";
-                return d.name + ", " + d.count+", "+(((d.cntComp-d.count)/d.cntComp)*100) + "%";//important line!!!!!
+                return d.name + ", " + d.count+", " + (((d.cntComp-d.count)/d.cntComp)*100).toFixed(2) + "%";//important line!!!!!
             });
 
         // Change the circle fill depending on whether it has children and is collapsed
