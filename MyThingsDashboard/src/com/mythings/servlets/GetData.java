@@ -30,7 +30,7 @@ public class GetData extends HttpServlet {
 		
 		MyConnection con=null;
 		PrintWriter out = response.getWriter();
-		String refDate, compDate,exchangeId,noBidId;
+		String refDate, compDate,exchangeId,noBidId, refHour, compHour;
 		String func = request.getParameter("func");
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
@@ -83,19 +83,23 @@ public class GetData extends HttpServlet {
 				exchangeId = request.getParameter("exchId");
 				noBidId = request.getParameter("noBidId");
 				System.out.println(noBidId);
+				refDate = request.getParameter("refDate");
+				refHour = request.getParameter("refHour");
+				compDate = request.getParameter("compDate");
+				compHour = request.getParameter("compHour");
 				refDate = convertDate(request.getParameter("refDate"));
 				compDate = convertDate(request.getParameter("compDate"));
 //				String s = NoBidQuery.getAdv(con.getCon(),exchangeId,noBidId);
 //				System.out.println(s);
 				System.out.println(refDate + ", " + compDate);
-		
-				out.print(NoBidQuery.getAdv(con.getCon2(),exchangeId, refDate, compDate, noBidId));		
+				out.print(NoBidQuery.getAdv(con.getCon2(),exchangeId, refDate, refHour, compHour, compDate, noBidId));		
 			}			
 
 		} catch (SQLException e) { e.printStackTrace(); }
 		
 		out.close();
 	}
+	
 	private String convertDate(String s){
 		String day = s.substring(3, 5);
 		String month = s.substring(0, 2);
