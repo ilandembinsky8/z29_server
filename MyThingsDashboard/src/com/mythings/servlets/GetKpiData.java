@@ -20,7 +20,7 @@ import com.mythings.db.MyConnection;
 public class GetKpiData extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-    private static String fromDate,exchangeId, advId,campId,groupId,toDate;
+    private static String exchangeId, advId,campId,groupId,creativeId,fromDate,toDate;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -79,6 +79,11 @@ public class GetKpiData extends HttpServlet {
 				
 				groupId = request.getParameter("groupId");
 				out.print(KpiQuery.getCreatives(con.getCon(), exchangeId, advId, campId, groupId,fromDate, toDate));
+			}
+			else if(func.equals("getGraphJson")){
+				
+				creativeId = request.getParameter("creativeId");
+				out.print(KpiQuery.getGraphJson(con.getCon(), exchangeId, advId, campId, groupId,creativeId,fromDate,toDate));
 			}
 		}catch(SQLException e){ e.printStackTrace(); }
 		

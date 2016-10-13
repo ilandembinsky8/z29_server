@@ -83,20 +83,24 @@ public class GetData extends HttpServlet {
 				exchangeId = request.getParameter("exchId");
 				noBidId = request.getParameter("noBidId");
 				System.out.println(noBidId);
-				refDate = request.getParameter("refDate");
-				compDate = request.getParameter("compDate");
+				refDate = convertDate(request.getParameter("refDate"));
+				compDate = convertDate(request.getParameter("compDate"));
 //				String s = NoBidQuery.getAdv(con.getCon(),exchangeId,noBidId);
 //				System.out.println(s);
 				System.out.println(refDate + ", " + compDate);
-//				String day = date.substring(3, 5);
-//				String month = date.substring(0, 2);
-//				String year = date.substring(6, 10);
-//				date = year + "-" + month + "-" + day;
+		
 				out.print(NoBidQuery.getAdv(con.getCon2(),exchangeId, refDate, compDate, noBidId));		
 			}			
 
 		} catch (SQLException e) { e.printStackTrace(); }
 		
 		out.close();
+	}
+	private String convertDate(String s){
+		String day = s.substring(3, 5);
+		String month = s.substring(0, 2);
+		String year = s.substring(6);
+		return year + "-" + month + "-" + day;
+		
 	}
 }

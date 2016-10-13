@@ -147,14 +147,15 @@ public class KpiQuery {
 		
 		jArr = new JsonArray();
 		
-		query = "SELECT DISTINCT KPI_MAINTABLE.ADV_PROJECT_CREATIVE_ID,ADV_PROJECT_CREATIVE.CREATIVE_NAME"
-			  + " FROM KPI_MAINTABLE,ADV_PROJECT_CREATIVE"
-			  + " WHERE KPI_MAINTABLE.PRT_CAMPAIGN_ID="+exchId
-			  + " AND KPI_MAINTABLE.ADV_PROJECT_CREATIVE_ID=ADV_PROJECT_CREATIVE.ADV_PROJECT_CREATIVE_ID"
-			  + " AND KPI_MAINTABLE.ADV_PROJECT_ID="+advId
-			  + " AND KPI_MAINTABLE.ADV_CAMPAIGN_ID="+campId
-			  + " AND KPI_MAINTABLE.ADGROUP_ID="+groupId
-			  + " AND KPI_MAINTABLE.EVENT_DATE BETWEEN '"+ fromDate +"' AND '"+ toDate +"'";
+		query = "SELECT DISTINCT Creatives.creativeID, Creatives.creativeName"
+			  + " FROM Creatives,Exch_Creative,Camp_Creative,Group_Creative"
+			  + " WHERE Creatives.creativeID=Exch_Creative.creativeID"
+			  + " AND Creatives.creativeID=Camp_Creative.creativeID"
+			  + " AND Exch_Creative.exchangeID="+exchId
+			  + " AND Creatives.advertiserId="+advId
+			  + " AND Camp_Creative.campaignID="+campId
+			  + " AND Group_Creative.groupID="+groupId
+			  + " AND Exch_Creative.eventDate BETWEEN '"+ fromDate +"' AND '"+ toDate +"'";
 
 		st = con.createStatement();
 		rs = st.executeQuery(query);
@@ -166,6 +167,35 @@ public class KpiQuery {
 			jArr.add(jObj);
 		}
 	
+	    return jArr.toString();
+	}
+
+
+	public static String getGraphJson(Connection con,String exchId, String advId, String campId, String groupId, String creativeId, String fromDate,String toDate) throws SQLException{
+		
+		jArr = new JsonArray();
+	
+		query = "SELECT eventDate,SUM(impressions) AS impressions,SUM(clicks) AS clicks"
+			  + " FROM KPI_MAINTABLE"
+			  + " WHERE exchangeID="+exchId
+			  + " AND advertiserID="+advId
+			  + " AND campaignID="+campId
+			  + " AND groupID="+groupId
+			  + " AND creativeID="+creativeId
+			  + " AND eventDate BETWEEN '"+ fromDate +"' AND '"+ toDate +"'"
+			  + " GROUP BY eventDate;";
+
+		st = con.createStatement();
+		rs = st.executeQuery(query);
+		
+		while(rs.next()){
+			jObj = new JsonObject();
+			jObj.addProperty("date", rs.getDate(1).toString());
+			jObj.addProperty("impressions", rs.getInt(2));
+			jObj.addProperty("clicks", rs.getInt(3));
+			jArr.add(jObj);
+		}
+		
 	    return jArr.toString();
 	}
 }
