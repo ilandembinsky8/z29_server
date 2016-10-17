@@ -98,8 +98,7 @@ public class NoBidQuery {
 				+ compToDate + "\')"
 				+ " and (nobid_reasons_main_updated.EVENT_TIME=\'"
 				+ comphour + "\'))"
-				+ " group by ADV_PROJECT_ID"
-				+ " LIMIT 3";
+				+ " group by ADV_PROJECT_ID";
 
 		st = con.createStatement();
 		ResultSet rs = st.executeQuery(query);
@@ -151,7 +150,7 @@ public class NoBidQuery {
 				+ compToDate + "\')"
 				+ " and (nobid_reasons_main_updated.EVENT_TIME=\'"
 				+ comphour + "\'))" 
-				+ " and ADV_PROJECT.ADV_PROJECT_ID=" + idAdv + " LIMIT 4";
+				+ " and ADV_PROJECT.ADV_PROJECT_ID=" + idAdv;
 
 		st = con.createStatement();
 		ResultSet rs = st.executeQuery(query);
@@ -195,8 +194,7 @@ public class NoBidQuery {
 				+ ") or (nobid_reasons_main_updated.EVENT_DATE=\'"
 				+ compToDate + "\')"
 				+ " and (nobid_reasons_main_updated.EVENT_TIME=\'"
-				+ comphour + "\'))" 
-				+ " LIMIT 5";
+				+ comphour + "\'))";
 
 		st = con.createStatement();
 		ResultSet rs = st.executeQuery(query);
@@ -207,6 +205,8 @@ public class NoBidQuery {
 			jObj = new JsonObject();
 			jObj.addProperty("name", rs.getString(2));
 			//lina
+			if(rs.getInt(1)==50700)
+				System.out.println(1);
 			jObj.add("children", getCreatives(con, exchangeId, noBidId, idAdv, idCompaign, rs.getInt(1),refdate,refhour,comphour, compToDate).getAsJsonArray());
 			refTotalCount[2] += refTotalCount[3];
 			compTotalCount[2] += compTotalCount[3];
@@ -279,14 +279,58 @@ public class NoBidQuery {
 //		jArr1.
 //		JsonObject a = new JsonObject();
 //		jArr1.get(0).getAsJsonObject().get("cntComp");
-		for(int i=0;i<jArr.size();i++){
-			JsonObject a = jArr1.get(i).getAsJsonObject();
-			String c = a.get("cntComp").toString();
-//			int b = jArr1.get(0).getAsInt();
-			c = c.replaceAll("\"", "");
-			jArr.get(i).getAsJsonObject().addProperty("cntComp",c );
-			refTotalCount[3] += jArr.get(i).getAsJsonObject().get("count").getAsInt();
-			compTotalCount[3] += jArr.get(i).getAsJsonObject().get("cntComp").getAsInt();
+		if(adGroup == 1084)
+			System.out.println(1);
+		int n;
+		if(jArr.size() == 0){
+			n = jArr1.size();
+			for(int i=0;i<n;i++){
+				jArr1.get(i).getAsJsonObject().addProperty("count", 0);
+				compTotalCount[3] += jArr1.get(i).getAsJsonObject().get("cntComp").getAsInt();
+			}
+		}
+		else if(jArr1.size() == 0){
+			n = jArr.size();
+			for(int i=0;i<n;i++){
+				jArr.get(i).getAsJsonObject().addProperty("cntComp",0 );
+				refTotalCount[3] += jArr.get(i).getAsJsonObject().get("count").getAsInt();
+			}
+		}
+		else if((jArr.size() != 0) && (jArr1.size() != 0)){
+			if(jArr.size() < jArr1.size()){
+				n = jArr.size();
+				int i;
+				for(i=0;i<n;i++){
+					JsonObject a = jArr1.get(i).getAsJsonObject();
+					String c = a.get("cntComp").toString();
+//					int b = jArr1.get(0).getAsInt();
+					c = c.replaceAll("\"", "");
+					jArr.get(i).getAsJsonObject().addProperty("cntComp",c );
+					refTotalCount[3] += jArr.get(i).getAsJsonObject().get("count").getAsInt();
+					compTotalCount[3] += jArr.get(i).getAsJsonObject().get("cntComp").getAsInt();
+				}
+				for(;i<jArr1.size();i++){
+					jArr1.get(i).getAsJsonObject().addProperty("count", 0);
+					compTotalCount[3] += jArr1.get(i).getAsJsonObject().get("cntComp").getAsInt();
+				}
+			}
+			else{
+				n = jArr1.size();
+				int i;
+				for(i=0;i<n;i++){
+					JsonObject a = jArr1.get(i).getAsJsonObject();
+					String c = a.get("cntComp").toString();
+//					int b = jArr1.get(0).getAsInt();
+					c = c.replaceAll("\"", "");
+					jArr.get(i).getAsJsonObject().addProperty("cntComp",c );
+					refTotalCount[3] += jArr.get(i).getAsJsonObject().get("count").getAsInt();
+					compTotalCount[3] += jArr.get(i).getAsJsonObject().get("cntComp").getAsInt();
+				}
+				for(;i<jArr.size();i++){
+					jArr.get(i).getAsJsonObject().addProperty("cntComp",0 );
+					refTotalCount[3] += jArr.get(i).getAsJsonObject().get("count").getAsInt();
+				}
+			}
 		}
 		
 		

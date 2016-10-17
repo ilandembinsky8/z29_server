@@ -25,7 +25,7 @@
 
 </head>
 <body>
-	<div class="top-message">Message</div>
+	<div class="top-message"></div>
 	<div class="blackWindow"></div>
 	<div class="loader"></div> 
 	<div class="container">
@@ -74,9 +74,7 @@
  	
 		<div class="row">
 			<div class="col-xs-12">
-		    	<h3>Fill to show a bar chart</h3>
-                        <input type="checkbox" id="clicks" checked>Clicks Line</input>
-                        <input type="checkbox" id="impressions" checked>Impressions Line</input>
+		    	<h3>Fill to show a bar chart</h3> 
 		    </div>
 		    <div class="col-xs-12">
 		    	<form class="form-horizontal" role="form">
@@ -144,7 +142,6 @@
 			  					<option>select</option>
 			  				</select>
 		                </div>
-                                
 		            </div>
 		            
 		            <div class="form-group">                        
@@ -166,7 +163,7 @@
     <script src="js/dashboard.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/d3.v3.min.js"></script>
-     <script src="js/c3.min.js"></script>
+    <script src="js/c3.min.js"></script>
 	<script src="js/kpi-graph.js"></script>
     <script src="js/kpi.js"></script>
     

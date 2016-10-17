@@ -57,41 +57,17 @@ public class GetData extends HttpServlet {
 				
 				exchangeId = request.getParameter("exchId");
 				out.print(NoBidQuery.getNoBidReasons(con.getCon2(), exchangeId));
-				System.out.println("getNoBidReasons Finished");
 			}
 			else if(func.equals("getAdv")){
-				
-			/*	exchangeId = request.getParameter("exchId");
-				noBidId = request.getParameter("noBidId");
-				Gson gson = new Gson();
-				JsonParser jsonParser = new JsonParser();
-				JsonArray jsonArray = (JsonArray) jsonParser.parse(noBidId);
-				
-				if (jsonArray != null) { 
-				   int len = jsonArray.size();
-				   for (int i=0;i<len;i++){ 
-					   noBidIds.add(jsonArray.get(i).toString());
-				   } 
-				}
-	            
 			
-				out.print(NoBidQuery.getAdv(con.getCon2(),exchangeId,noBidIds));*/
-		
-				
-				
-		//******************changed by Avgana************************////  
 				exchangeId = request.getParameter("exchId");
 				noBidId = request.getParameter("noBidId");
-				System.out.println(noBidId);
 				refDate = request.getParameter("refDate");
 				refHour = request.getParameter("refHour");
 				compDate = request.getParameter("compDate");
 				compHour = request.getParameter("compHour");
 				refDate = convertDate(request.getParameter("refDate"));
 				compDate = convertDate(request.getParameter("compDate"));
-//				String s = NoBidQuery.getAdv(con.getCon(),exchangeId,noBidId);
-//				System.out.println(s);
-				System.out.println(refDate + ", " + compDate);
 				out.print(NoBidQuery.getAdv(con.getCon2(),exchangeId, refDate, refHour, compHour, compDate, noBidId));		
 			}			
 
@@ -105,6 +81,5 @@ public class GetData extends HttpServlet {
 		String month = s.substring(0, 2);
 		String year = s.substring(6);
 		return year + "-" + month + "-" + day;
-		
 	}
 }

@@ -40,7 +40,6 @@ public class KpiQuery {
 		
 		jArr = new JsonArray();
 		
-//		query = "SELECT * FROM PRT_CAMPAIGN;";
 		query = "SELECT * FROM Exchanges;";
 		
 		st =  con.createStatement();
@@ -60,9 +59,6 @@ public class KpiQuery {
 		
 		jArr = new JsonArray();
 	
-		/*query = "SELECT distinct ADV_PROJECT.ADV_PROJECT_ID , ADV_PROJECT.ADV_PROJECT_NAME"
-			  + " FROM ADV_PROJECT , KPI_MAINTABLE"
-			  + " WHERE ADV_PROJECT.ADV_PROJECT_ID=KPI_MAINTABLE.ADV_PROJECT_ID AND KPI_MAINTABLE.PRT_CAMPAIGN_ID=" + exchId;*/
 		query = "SELECT DISTINCT Advertisers.advertiserID, Advertisers.advertiserName"
 			  +	" FROM Advertisers INNER JOIN Exch_Adv"
 			  + " WHERE Advertisers.advertiserID=Exch_Adv.advertiserID"
@@ -86,11 +82,6 @@ public class KpiQuery {
 		
 		jArr = new JsonArray();
 		
-		/*query = "SELECT distinct ADV_CAMPAIGN.ADV_CAMPAIGN_ID , ADV_CAMPAIGN.ADV_CAMPAIGN_NAME"
-			  + " FROM ADV_CAMPAIGN , KPI_MAINTABLE"
-			  + " WHERE ADV_CAMPAIGN.ADV_CAMPAIGN_ID=KPI_MAINTABLE.ADV_CAMPAIGN_ID"
-			  + " AND KPI_MAINTABLE.PRT_CAMPAIGN_ID=" + exchId
-			  + " AND KPI_MAINTABLE.ADV_PROJECT_ID=" + advId;*/
 		query = "SELECT DISTINCT Campaigns.campaignID, Campaigns.campaignName"
 			  +	" FROM Campaigns INNER JOIN Exch_Camp"
 			  +	" WHERE Campaigns.campaignID=Exch_Camp.campaignID" 
@@ -115,12 +106,6 @@ public class KpiQuery {
 		
 		jArr = new JsonArray();
 		
-		/*query = "SELECT distinct ADGROUP.ADGROUP_ID , ADGROUP.AD_GROUP_NAME"
-			  + " FROM ADGROUP , KPI_MAINTABLE"
-			  + " WHERE ADGROUP.ADGROUP_ID = KPI_MAINTABLE.ADGROUP_ID"
-			  + " AND KPI_MAINTABLE.PRT_CAMPAIGN_ID=" + exchId
-			  + " AND KPI_MAINTABLE.ADV_PROJECT_ID=" + advId
-			  + " AND KPI_MAINTABLE.ADV_CAMPAIGN_ID=" + campId;*/
 		query = "SELECT DISTINCT Groups.groupID, Groups.groupName"
 			  + " FROM Groups INNER JOIN Exch_Group"
 			  + " WHERE Groups.groupID=Exch_Group.groupID" 

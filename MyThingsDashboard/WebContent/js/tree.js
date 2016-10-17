@@ -62,13 +62,13 @@ treeJSON = d3.json('', function(error, treeData1) {
 
     // sort the tree according to the node names
 
-//    function sortTree() {
-//        tree.sort(function(a, b) {
-//            return b.name.toLowerCase() < a.name.toLowerCase() ? 1 : -1;
-//        });
-//    }
-//    // Sort the tree initially incase the JSON isn't in a sorted order.
-//    sortTree();
+    function sortTree() {
+        tree.sort(function(a, b) {
+            return b.name.toLowerCase() < a.name.toLowerCase() ? 1 : -1;
+        });
+    }
+    // Sort the tree initially incase the JSON isn't in a sorted order.
+    sortTree();
 
     // TODO: Pan function, can be better implemented.
 
