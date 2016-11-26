@@ -1,0 +1,74 @@
+.node {
+    cursor: pointer;
+}
+   
+.node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+}
+   
+.node text {
+    font-size:10px; 
+    font-family:sans-serif;
+}
+   
+.link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+}
+
+.templink {
+    fill: none;
+    stroke: red;
+    stroke-width: 3px;
+}
+
+.ghostCircle.show{
+    display:block;
+}
+
+.ghostCircle, .activeDrag .ghostCircle{
+    display: none;
+}
+  
+svg {
+  	width:100%;
+}
+  
+.input-group {
+  	margin-bottom: 3px;
+  	margin-right: 3px;
+  	float: left !important;
+}
+  
+#btn_send {
+	display: none;
+}
+
+.form-group {
+	margin-bottom: 0;
+}
+
+#selectReasons {
+	height: 32px;
+}
+
+.checkbox-inline, .radio-inline {
+    font-size: 14px;
+} 
+
+.text-align {
+	text-align: right;
+}  
+
+@media (max-width:768px){
+	.text-align {
+		text-align: left;
+	}  	
+}
+  
+  
+  
+  

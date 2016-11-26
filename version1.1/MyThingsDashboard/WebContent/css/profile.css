@@ -1,0 +1,10 @@
+form {
+	margin-top: 20px;
+}
+
+
+@media (min-width:1000px) {
+	.container {
+		width: 700px;
+	}
+}
