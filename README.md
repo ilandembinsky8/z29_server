@@ -3,9 +3,13 @@
 Lightweight Analytic Framework for Advertising
 
 *Dashboard system for Campaign Managers
+
 *Allowing campaign optimization and error detection
+
 *Requirements defined by MyThings CTO
+
 *Using real data - big data aggregation
+
 *Required: Learning and understanding the AdTech arena - biz & tech
 version 1.0 
 
